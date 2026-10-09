@@ -34,3 +34,7 @@ flowchart LR
 - [Instructions: setup, training, the Mac app](docs/INSTRUCTIONS.md)
 - [System design](docs/SYSTEM-DESIGN.md)
 - [File structure](docs/FILE-STRUCTURE.md)
+
+## License
+
+MIT. See [LICENSE](LICENSE).
