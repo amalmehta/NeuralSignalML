@@ -1,0 +1,204 @@
+{
+  "name": "Spikes - GRU",
+  "id": "spikes-gru",
+  "method": "gru",
+  "experiment": "mc_maze",
+  "config_hash": "3f8ccc457c",
+  "minutes": 38.8,
+  "protocols": {
+    "nlb_split": {
+      "rows": [
+        {
+          "fold": 0,
+          "seed": 0,
+          "n_train": 188,
+          "n_test": 62,
+          "r2": 0.7328424453735352,
+          "seconds": 150.4,
+          "epochs_run": 224
+        },
+        {
+          "fold": 0,
+          "seed": 1,
+          "n_train": 188,
+          "n_test": 62,
+          "r2": 0.7460280060768127,
+          "seconds": 155.6,
+          "epochs_run": 160
+        },
+        {
+          "fold": 0,
+          "seed": 2,
+          "n_train": 188,
+          "n_test": 62,
+          "r2": 0.7586588263511658,
+          "seconds": 350.9,
+          "epochs_run": 183
+        }
+      ],
+      "r2_per_seed": [
+        0.7328424453735352,
+        0.7460280060768127,
+        0.7586588263511658
+      ],
+      "mean_r2": 0.7458430926005045,
+      "std_r2_over_seeds": 0.010540304437122368,
+      "ci95_trials": [
+        0.6103008061647415,
+        0.8250778526067734
+      ],
+      "n_test_trials": 62
+    },
+    "blocked_cv": {
+      "rows": [
+        {
+          "fold": 0,
+          "seed": 0,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.8560628890991211,
+          "seconds": 112.5,
+          "epochs_run": 193
+        },
+        {
+          "fold": 1,
+          "seed": 0,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.7495110034942627,
+          "seconds": 109.3,
+          "epochs_run": 183
+        },
+        {
+          "fold": 2,
+          "seed": 0,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.7787377238273621,
+          "seconds": 74.5,
+          "epochs_run": 139
+        },
+        {
+          "fold": 3,
+          "seed": 0,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.7993576526641846,
+          "seconds": 98.8,
+          "epochs_run": 154
+        },
+        {
+          "fold": 4,
+          "seed": 0,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.7904409170150757,
+          "seconds": 83.6,
+          "epochs_run": 131
+        },
+        {
+          "fold": 0,
+          "seed": 1,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.8294822573661804,
+          "seconds": 103.8,
+          "epochs_run": 162
+        },
+        {
+          "fold": 1,
+          "seed": 1,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.8017574548721313,
+          "seconds": 88.2,
+          "epochs_run": 135
+        },
+        {
+          "fold": 2,
+          "seed": 1,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.8000233769416809,
+          "seconds": 104.3,
+          "epochs_run": 157
+        },
+        {
+          "fold": 3,
+          "seed": 1,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.7790844440460205,
+          "seconds": 56.1,
+          "epochs_run": 91
+        },
+        {
+          "fold": 4,
+          "seed": 1,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.7789736986160278,
+          "seconds": 109.2,
+          "epochs_run": 178
+        },
+        {
+          "fold": 0,
+          "seed": 2,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.8540036082267761,
+          "seconds": 140.5,
+          "epochs_run": 224
+        },
+        {
+          "fold": 1,
+          "seed": 2,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.7794827222824097,
+          "seconds": 134.3,
+          "epochs_run": 228
+        },
+        {
+          "fold": 2,
+          "seed": 2,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.8158336877822876,
+          "seconds": 117.5,
+          "epochs_run": 167
+        },
+        {
+          "fold": 3,
+          "seed": 2,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.804213285446167,
+          "seconds": 210.7,
+          "epochs_run": 311
+        },
+        {
+          "fold": 4,
+          "seed": 2,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.8034221529960632,
+          "seconds": 103.0,
+          "epochs_run": 148
+        }
+      ],
+      "r2_per_seed": [
+        0.7924651503562927,
+        0.7977930307388306,
+        0.8101553916931152
+      ],
+      "mean_r2": 0.8001378575960795,
+      "std_r2_over_seeds": 0.00740989515812529,
+      "ci95_trials": [
+        0.7636068895459175,
+        0.8141524076461792
+      ],
+      "n_test_trials": 250
+    }
+  }
+}

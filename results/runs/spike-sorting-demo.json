@@ -1,0 +1,44 @@
+{
+  "recall": 0.9877675840978594,
+  "precision": 1.0,
+  "sorting_accuracy": 0.9876160990712074,
+  "per_unit": {
+    "unit 0": 0.991869918699187,
+    "unit 1": 0.9868421052631579,
+    "unit 2": 0.9838709677419355
+  },
+  "n_true": 327,
+  "n_detected": 323,
+  "cluster_to_unit": {
+    "0": 1,
+    "1": 0,
+    "2": 2
+  },
+  "n_units_found": 3,
+  "other_seeds": [
+    {
+      "seed": 1,
+      "n_units_found": 4,
+      "recall": 0.9752747252747253,
+      "sorting_accuracy": 0.9746478873239437
+    },
+    {
+      "seed": 2,
+      "n_units_found": 5,
+      "recall": 0.9793510324483776,
+      "sorting_accuracy": 0.9849397590361446
+    },
+    {
+      "seed": 3,
+      "n_units_found": 6,
+      "recall": 0.9768115942028985,
+      "sorting_accuracy": 0.9792284866468842
+    },
+    {
+      "seed": 4,
+      "n_units_found": 6,
+      "recall": 0.97953216374269,
+      "sorting_accuracy": 0.9850746268656716
+    }
+  ]
+}

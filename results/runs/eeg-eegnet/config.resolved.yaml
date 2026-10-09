@@ -1,0 +1,54 @@
+id: eeg-eegnet
+name: EEG - EEGNet
+experiment: bci2a
+method: eegnet
+subjects:
+- 1
+- 2
+- 3
+- 4
+- 5
+- 6
+- 7
+- 8
+- 9
+protocols:
+- cross_session
+- cross_subject
+threads: 4
+verbose: true
+seeds:
+  cross_session:
+  - 0
+  - 1
+  - 2
+  cross_subject:
+  - 0
+preprocess:
+  band:
+  - 4.0
+  - 40.0
+  tmin: 0.5
+  tmax: 2.5
+  eog_regression: true
+  resample_fs: 125
+  reject_uv: 100.0
+  causal: true
+model:
+  F1: 8
+  D: 2
+  F2: 16
+  dropout: 0.5
+training:
+  lr: 0.001
+  weight_decay: 0.001
+  batch_size: 64
+  max_epochs: 300
+  patience: 300
+  val_frac: 0.2
+training_overrides:
+  cross_subject:
+    max_epochs: 80
+    patience: 80
+_source: configs/EEG EEGNet.yaml
+_hash: 7f8446ecad

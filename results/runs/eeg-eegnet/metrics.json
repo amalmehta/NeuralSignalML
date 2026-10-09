@@ -1,0 +1,430 @@
+{
+  "name": "EEG - EEGNet",
+  "id": "eeg-eegnet",
+  "method": "eegnet",
+  "experiment": "bci2a",
+  "config_hash": "7f8446ecad",
+  "minutes": 532.2,
+  "protocols": {
+    "cross_session": {
+      "rows": [
+        {
+          "subject": 1,
+          "seed": 0,
+          "n_train": 273,
+          "n_test": 288,
+          "accuracy": 0.7777777777777778,
+          "kappa": 0.7037037037037037,
+          "seconds": 1273.6,
+          "epochs_run": 300
+        },
+        {
+          "subject": 1,
+          "seed": 1,
+          "n_train": 273,
+          "n_test": 288,
+          "accuracy": 0.7430555555555556,
+          "kappa": 0.6574074074074074,
+          "seconds": 550.2,
+          "epochs_run": 300
+        },
+        {
+          "subject": 1,
+          "seed": 2,
+          "n_train": 273,
+          "n_test": 288,
+          "accuracy": 0.7569444444444444,
+          "kappa": 0.6759259259259259,
+          "seconds": 1197.4,
+          "epochs_run": 300
+        },
+        {
+          "subject": 2,
+          "seed": 0,
+          "n_train": 270,
+          "n_test": 288,
+          "accuracy": 0.4097222222222222,
+          "kappa": 0.2129629629629629,
+          "seconds": 1707.5,
+          "epochs_run": 300
+        },
+        {
+          "subject": 2,
+          "seed": 1,
+          "n_train": 270,
+          "n_test": 288,
+          "accuracy": 0.4375,
+          "kappa": 0.25,
+          "seconds": 1189.4,
+          "epochs_run": 300
+        },
+        {
+          "subject": 2,
+          "seed": 2,
+          "n_train": 270,
+          "n_test": 288,
+          "accuracy": 0.34375,
+          "kappa": 0.125,
+          "seconds": 200.0,
+          "epochs_run": 300
+        },
+        {
+          "subject": 3,
+          "seed": 0,
+          "n_train": 269,
+          "n_test": 288,
+          "accuracy": 0.8541666666666666,
+          "kappa": 0.8055555555555556,
+          "seconds": 239.1,
+          "epochs_run": 300
+        },
+        {
+          "subject": 3,
+          "seed": 1,
+          "n_train": 269,
+          "n_test": 288,
+          "accuracy": 0.8333333333333334,
+          "kappa": 0.7777777777777778,
+          "seconds": 143.9,
+          "epochs_run": 300
+        },
+        {
+          "subject": 3,
+          "seed": 2,
+          "n_train": 269,
+          "n_test": 288,
+          "accuracy": 0.7743055555555556,
+          "kappa": 0.6990740740740741,
+          "seconds": 191.9,
+          "epochs_run": 300
+        },
+        {
+          "subject": 4,
+          "seed": 0,
+          "n_train": 262,
+          "n_test": 288,
+          "accuracy": 0.5104166666666666,
+          "kappa": 0.3472222222222222,
+          "seconds": 798.1,
+          "epochs_run": 300
+        },
+        {
+          "subject": 4,
+          "seed": 1,
+          "n_train": 262,
+          "n_test": 288,
+          "accuracy": 0.4930555555555556,
+          "kappa": 0.32407407407407407,
+          "seconds": 1866.1,
+          "epochs_run": 300
+        },
+        {
+          "subject": 4,
+          "seed": 2,
+          "n_train": 262,
+          "n_test": 288,
+          "accuracy": 0.5486111111111112,
+          "kappa": 0.39814814814814814,
+          "seconds": 2555.5,
+          "epochs_run": 300
+        },
+        {
+          "subject": 5,
+          "seed": 0,
+          "n_train": 262,
+          "n_test": 288,
+          "accuracy": 0.4548611111111111,
+          "kappa": 0.27314814814814814,
+          "seconds": 2420.8,
+          "epochs_run": 300
+        },
+        {
+          "subject": 5,
+          "seed": 1,
+          "n_train": 262,
+          "n_test": 288,
+          "accuracy": 0.40625,
+          "kappa": 0.20833333333333337,
+          "seconds": 2388.5,
+          "epochs_run": 300
+        },
+        {
+          "subject": 5,
+          "seed": 2,
+          "n_train": 262,
+          "n_test": 288,
+          "accuracy": 0.5208333333333334,
+          "kappa": 0.36111111111111116,
+          "seconds": 2029.5,
+          "epochs_run": 300
+        },
+        {
+          "subject": 6,
+          "seed": 0,
+          "n_train": 216,
+          "n_test": 288,
+          "accuracy": 0.4930555555555556,
+          "kappa": 0.32407407407407407,
+          "seconds": 1648.6,
+          "epochs_run": 300
+        },
+        {
+          "subject": 6,
+          "seed": 1,
+          "n_train": 216,
+          "n_test": 288,
+          "accuracy": 0.4409722222222222,
+          "kappa": 0.25462962962962965,
+          "seconds": 1777.1,
+          "epochs_run": 300
+        },
+        {
+          "subject": 6,
+          "seed": 2,
+          "n_train": 216,
+          "n_test": 288,
+          "accuracy": 0.4409722222222222,
+          "kappa": 0.25462962962962965,
+          "seconds": 1602.1,
+          "epochs_run": 300
+        },
+        {
+          "subject": 7,
+          "seed": 0,
+          "n_train": 271,
+          "n_test": 288,
+          "accuracy": 0.5625,
+          "kappa": 0.41666666666666663,
+          "seconds": 343.5,
+          "epochs_run": 300
+        },
+        {
+          "subject": 7,
+          "seed": 1,
+          "n_train": 271,
+          "n_test": 288,
+          "accuracy": 0.6423611111111112,
+          "kappa": 0.5231481481481481,
+          "seconds": 170.3,
+          "epochs_run": 300
+        },
+        {
+          "subject": 7,
+          "seed": 2,
+          "n_train": 271,
+          "n_test": 288,
+          "accuracy": 0.65625,
+          "kappa": 0.5416666666666667,
+          "seconds": 172.5,
+          "epochs_run": 300
+        },
+        {
+          "subject": 8,
+          "seed": 0,
+          "n_train": 258,
+          "n_test": 288,
+          "accuracy": 0.7777777777777778,
+          "kappa": 0.7037037037037037,
+          "seconds": 188.7,
+          "epochs_run": 300
+        },
+        {
+          "subject": 8,
+          "seed": 1,
+          "n_train": 258,
+          "n_test": 288,
+          "accuracy": 0.7569444444444444,
+          "kappa": 0.6759259259259259,
+          "seconds": 209.2,
+          "epochs_run": 300
+        },
+        {
+          "subject": 8,
+          "seed": 2,
+          "n_train": 258,
+          "n_test": 288,
+          "accuracy": 0.7743055555555556,
+          "kappa": 0.6990740740740741,
+          "seconds": 200.9,
+          "epochs_run": 300
+        },
+        {
+          "subject": 9,
+          "seed": 0,
+          "n_train": 209,
+          "n_test": 288,
+          "accuracy": 0.8159722222222222,
+          "kappa": 0.7546296296296297,
+          "seconds": 178.6,
+          "epochs_run": 300
+        },
+        {
+          "subject": 9,
+          "seed": 1,
+          "n_train": 209,
+          "n_test": 288,
+          "accuracy": 0.8194444444444444,
+          "kappa": 0.7592592592592593,
+          "seconds": 189.8,
+          "epochs_run": 300
+        },
+        {
+          "subject": 9,
+          "seed": 2,
+          "n_train": 209,
+          "n_test": 288,
+          "accuracy": 0.7743055555555556,
+          "kappa": 0.6990740740740741,
+          "seconds": 195.4,
+          "epochs_run": 300
+        }
+      ],
+      "per_subject_accuracy": {
+        "A01": 0.7592592592592592,
+        "A02": 0.39699074074074076,
+        "A03": 0.8206018518518517,
+        "A04": 0.5173611111111112,
+        "A05": 0.4606481481481482,
+        "A06": 0.4583333333333333,
+        "A07": 0.6203703703703703,
+        "A08": 0.7696759259259259,
+        "A09": 0.8032407407407408
+      },
+      "per_subject_kappa": {
+        "A01": 0.6790123456790124,
+        "A02": 0.19598765432098764,
+        "A03": 0.7608024691358025,
+        "A04": 0.35648148148148145,
+        "A05": 0.2808641975308642,
+        "A06": 0.2777777777777778,
+        "A07": 0.49382716049382713,
+        "A08": 0.6929012345679012,
+        "A09": 0.7376543209876543
+      },
+      "mean_accuracy": 0.6229423868312757,
+      "std_accuracy": 0.1589316797886895,
+      "mean_kappa": 0.49725651577503427,
+      "chance_95": 0.2916666666666667
+    },
+    "cross_subject": {
+      "rows": [
+        {
+          "subject": 1,
+          "seed": 0,
+          "n_train": 4066,
+          "n_test": 288,
+          "accuracy": 0.5868055555555556,
+          "kappa": 0.44907407407407407,
+          "seconds": 644.2,
+          "epochs_run": 80
+        },
+        {
+          "subject": 2,
+          "seed": 0,
+          "n_train": 4069,
+          "n_test": 288,
+          "accuracy": 0.3159722222222222,
+          "kappa": 0.08796296296296291,
+          "seconds": 679.2,
+          "epochs_run": 80
+        },
+        {
+          "subject": 3,
+          "seed": 0,
+          "n_train": 4078,
+          "n_test": 288,
+          "accuracy": 0.6840277777777778,
+          "kappa": 0.5787037037037037,
+          "seconds": 857.1,
+          "epochs_run": 80
+        },
+        {
+          "subject": 4,
+          "seed": 0,
+          "n_train": 4130,
+          "n_test": 288,
+          "accuracy": 0.3645833333333333,
+          "kappa": 0.1527777777777778,
+          "seconds": 644.1,
+          "epochs_run": 80
+        },
+        {
+          "subject": 5,
+          "seed": 0,
+          "n_train": 4082,
+          "n_test": 288,
+          "accuracy": 0.2847222222222222,
+          "kappa": 0.04629629629629628,
+          "seconds": 567.7,
+          "epochs_run": 80
+        },
+        {
+          "subject": 6,
+          "seed": 0,
+          "n_train": 4193,
+          "n_test": 288,
+          "accuracy": 0.22569444444444445,
+          "kappa": -0.03240740740740744,
+          "seconds": 884.3,
+          "epochs_run": 80
+        },
+        {
+          "subject": 7,
+          "seed": 0,
+          "n_train": 4073,
+          "n_test": 288,
+          "accuracy": 0.3715277777777778,
+          "kappa": 0.1620370370370371,
+          "seconds": 732.2,
+          "epochs_run": 80
+        },
+        {
+          "subject": 8,
+          "seed": 0,
+          "n_train": 4093,
+          "n_test": 288,
+          "accuracy": 0.5590277777777778,
+          "kappa": 0.4120370370370371,
+          "seconds": 506.3,
+          "epochs_run": 80
+        },
+        {
+          "subject": 9,
+          "seed": 0,
+          "n_train": 4176,
+          "n_test": 288,
+          "accuracy": 0.4930555555555556,
+          "kappa": 0.32407407407407407,
+          "seconds": 780.5,
+          "epochs_run": 80
+        }
+      ],
+      "per_subject_accuracy": {
+        "A01": 0.5868055555555556,
+        "A02": 0.3159722222222222,
+        "A03": 0.6840277777777778,
+        "A04": 0.3645833333333333,
+        "A05": 0.2847222222222222,
+        "A06": 0.22569444444444445,
+        "A07": 0.3715277777777778,
+        "A08": 0.5590277777777778,
+        "A09": 0.4930555555555556
+      },
+      "per_subject_kappa": {
+        "A01": 0.44907407407407407,
+        "A02": 0.08796296296296291,
+        "A03": 0.5787037037037037,
+        "A04": 0.1527777777777778,
+        "A05": 0.04629629629629628,
+        "A06": -0.03240740740740744,
+        "A07": 0.1620370370370371,
+        "A08": 0.4120370370370371,
+        "A09": 0.32407407407407407
+      },
+      "mean_accuracy": 0.431712962962963,
+      "std_accuracy": 0.14653893088441117,
+      "mean_kappa": 0.24228395061728397,
+      "chance_95": 0.2916666666666667
+    }
+  }
+}

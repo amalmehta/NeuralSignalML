@@ -1,0 +1,17 @@
+# Kalman filter hand-velocity decoder on NLB MC_Maze Medium.
+id: spikes-kalman
+name: Spikes - Kalman filter
+experiment: mc_maze
+method: kalman
+protocols: [nlb_split, blocked_cv]
+n_folds: 5
+seeds: [0]                   # deterministic
+preprocess:
+  bin_ms: 50                 # 50 ms bins (Gilja et al. 2012); 20 ms counts are too noisy for a Kalman filter
+  lag_ms: 100                # spikes lead movement by ~100 ms
+  pre_ms: 750                # segment starts 750 ms before movement onset (warm-up)
+  post_ms: 450
+  score_pre_ms: 250          # R^2 scored on [-250, +450] ms around onset (NLB window)
+model:
+  ridge: 0.001
+  state: [velocity, position, acceleration]   # Wu et al. 2003; velocity-only loses half the R^2

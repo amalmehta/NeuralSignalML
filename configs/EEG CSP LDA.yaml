@@ -1,0 +1,19 @@
+# Classic motor-imagery baseline on BCI Competition IV 2a.
+id: eeg-csp-lda              # folder name under results/
+name: EEG - CSP + LDA
+experiment: bci2a
+method: csp_lda
+subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+protocols: [cross_session, cross_subject]
+seeds: [0]                   # CSP + LDA is deterministic; one seed is enough
+preprocess:
+  band: [8.0, 30.0]          # mu + beta, where motor imagery changes power
+  tmin: 0.5                  # seconds after the cue (skip the visual evoked response)
+  tmax: 2.5
+  eog_regression: true       # subtract eye artefacts using the EOG calibration runs
+  resample_fs: null          # keep 250 Hz
+  reject_uv: 100.0           # drop *training* trials above this peak-to-peak
+  causal: true               # online-compatible filtering
+model:
+  n_pairs: 3                 # 3 filters from each end of the CSP spectrum, per class
+  shrinkage: auto            # Ledoit-Wolf shrinkage for the LDA covariance

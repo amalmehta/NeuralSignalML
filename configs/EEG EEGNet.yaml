@@ -1,0 +1,38 @@
+# EEGNet-8,2 on BCI Competition IV 2a, same epochs and protocols as the CSP + LDA baseline.
+id: eeg-eegnet
+name: EEG - EEGNet
+experiment: bci2a
+method: eegnet
+subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+protocols: [cross_session, cross_subject]
+threads: 4
+verbose: true
+seeds:                       # neural nets vary with initialisation, so average several
+  cross_session: [0, 1, 2]
+  cross_subject: [0]         # one seed: each fold trains on ~4,500 trials on CPU
+preprocess:
+  band: [4.0, 40.0]          # wider band - let the network learn which frequencies matter
+  tmin: 0.5
+  tmax: 2.5
+  eog_regression: true
+  resample_fs: 125           # 250 Hz -> 125 Hz, as in the EEGNet paper
+  reject_uv: 100.0
+  causal: true
+model:
+  F1: 8                      # temporal filters
+  D: 2                       # spatial filters per temporal filter
+  F2: 16
+  dropout: 0.5
+training:
+  lr: 0.001
+  weight_decay: 0.001
+  batch_size: 64
+  max_epochs: 300
+  patience: 300              # = max_epochs: no early stopping. As in the EEGNet paper, train the full
+                             # budget and keep the weights with the best loss on a 20% validation split.
+                             # (patience 60 stopped slow learners like subject 2 at chance-level weights)
+  val_frac: 0.2
+training_overrides:          # compute cap (CPU-only, heavily loaded machine): each held-out-subject
+  cross_subject:             # fold trains on ~4,500 trials, so it gets a shorter budget
+    max_epochs: 80
+    patience: 80             # full (capped) budget, best-validation checkpoint

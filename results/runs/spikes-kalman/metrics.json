@@ -1,0 +1,86 @@
+{
+  "name": "Spikes - Kalman filter",
+  "id": "spikes-kalman",
+  "method": "kalman",
+  "experiment": "mc_maze",
+  "config_hash": "e87f8634ad",
+  "minutes": 21.8,
+  "protocols": {
+    "nlb_split": {
+      "rows": [
+        {
+          "fold": 0,
+          "seed": 0,
+          "n_train": 188,
+          "n_test": 62,
+          "r2": 0.553571343421936,
+          "seconds": 485.6
+        }
+      ],
+      "r2_per_seed": [
+        0.553571343421936
+      ],
+      "mean_r2": 0.553571343421936,
+      "std_r2_over_seeds": 0.0,
+      "ci95_trials": [
+        0.5003105081617832,
+        0.5982889041304589
+      ],
+      "n_test_trials": 62
+    },
+    "blocked_cv": {
+      "rows": [
+        {
+          "fold": 0,
+          "seed": 0,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.5510166883468628,
+          "seconds": 116.9
+        },
+        {
+          "fold": 1,
+          "seed": 0,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.595920979976654,
+          "seconds": 112.9
+        },
+        {
+          "fold": 2,
+          "seed": 0,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.5375528335571289,
+          "seconds": 78.0
+        },
+        {
+          "fold": 3,
+          "seed": 0,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.5314385294914246,
+          "seconds": 164.9
+        },
+        {
+          "fold": 4,
+          "seed": 0,
+          "n_train": 200,
+          "n_test": 50,
+          "r2": 0.5740386247634888,
+          "seconds": 285.3
+        }
+      ],
+      "r2_per_seed": [
+        0.5593686699867249
+      ],
+      "mean_r2": 0.5593686699867249,
+      "std_r2_over_seeds": 0.0,
+      "ci95_trials": [
+        0.531875804066658,
+        0.5857866734266282
+      ],
+      "n_test_trials": 250
+    }
+  }
+}
