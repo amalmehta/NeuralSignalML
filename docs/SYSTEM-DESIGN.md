@@ -148,6 +148,7 @@ flowchart LR
 
 ## Known limits
 
+- **Offline only.** Everything is offline decoding of recorded data; closed-loop performance (the user adapting to the decoder) isn't measured.
 - **Spike decoding** is tested on held-out trials of one session from one monkey. Nothing here measures performance across days.
 - **Spike sorting** is shown only on synthetic data (MC_Maze arrives sorted). BIC model selection over-splits on some seeds.
 - **EOG regression** removes some frontal brain signal along with eye artefacts. ICA would be the next step.

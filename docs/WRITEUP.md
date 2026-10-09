@@ -60,7 +60,7 @@ Chance is 25%. With 288 test trials, a random classifier exceeds 29.5% only 5% o
 | CSP + LDA | **63.9% ± 17.6** (κ 0.52) | **44.3% ± 14.2** (κ 0.26) |
 | EEGNet | **62.3% ± 15.9** (κ 0.50) | **43.2% ± 14.7** (κ 0.24) |
 
-EEGNet and CSP + LDA are statistically tied. EEGNet beats the baseline on 4 of 9 subjects in each protocol, and the mean differences (−1.6 points held-out session, −1.1 points held-out subject) are well inside the noise (Wilcoxon signed-rank p = 0.65 and 0.50). The per-subject numbers move together (correlation 0.85 held-out session, 0.96 held-out subject): whoever is easy for one method is mostly easy for the other, though subjects 5 and 7 swing by 14–19 points between methods.
+There is no significant difference between EEGNet and CSP + LDA. EEGNet beats the baseline on 4 of 9 subjects in each protocol, and the mean differences (−1.6 points held-out session, −1.1 points held-out subject) are well inside the noise (Wilcoxon signed-rank p = 0.65 and 0.50). The per-subject numbers move together (correlation 0.85 held-out session, 0.96 held-out subject): whoever is easy for one method is mostly easy for the other, though subjects 5 and 7 swing by 14–19 points between methods.
 
 ![Confusion matrices](figures/eeg-confusion.png)
 
@@ -145,6 +145,8 @@ MC_Maze arrives already sorted, so this demo shows the upstream step on a simula
 
 ## Honest caveats
 
+- **Offline decoding, not closed-loop control:** every number here is offline: decode recorded data, compare with what happened. In a live BCI the user sees the decoder's output and adapts to its errors, so offline R² or accuracy does not predict closed-loop performance well. That is why live systems are judged on task metrics such as bits per second, which this project does not measure.
+- **Baselines, not state of the art:** this is a careful comparison of classic and standard neural decoders under honest splits. Stronger published models exist for both datasets; nothing here is meant to compete with them.
 - **One session for spikes:** all spike results are within one session. Decoders usually degrade across days, which isn't measured here.
 - **Small n for EEG statistics:** with 9 subjects, a Wilcoxon test can't go below p ≈ 0.004.
 - **Compute caps:** the held-out-subject EEGNet folds were capped at 80 epochs and one seed, because training ran on a heavily loaded CPU.

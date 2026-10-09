@@ -21,6 +21,12 @@ flowchart LR
     M --> A["Mac app<br/>signals · spectrograms · run decoders"]
 ```
 
+## Limits
+
+- **Offline only.** All results decode recorded data. Closed-loop use, where the person reacts to the decoder, can perform quite differently; it isn't measured here.
+- **One monkey, one session** for the spike results, so drift across days isn't tested.
+- **Baselines, not state of the art.** A careful comparison of classic and standard neural decoders; stronger published models exist.
+
 ## Read more
 
 - [Write-up: each method explained, and what worked](docs/WRITEUP.md)
