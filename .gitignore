@@ -3,7 +3,7 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .DS_Store
-data/
+/data/
 results/models/
 results/logs/
 results/runs/*/predictions.npz

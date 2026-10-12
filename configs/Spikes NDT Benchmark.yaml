@@ -1,0 +1,23 @@
+# Neural Latents Benchmark protocol on MC_Maze Medium: Smoothing baseline vs Neural Data Transformer.
+id: spikes-nlb
+name: Spikes - NLB co-smoothing (NDT)
+experiment: nlb
+days: [medium]
+seeds: [0, 1, 2]
+threads: 2
+verbose: true
+ndt:
+  model:
+    d_model: 64              # smaller than the paper's default: ~190 training trials, CPU only
+    layers: 2
+    heads: 4
+    dropout: 0.4
+  lr: 0.001
+  weight_decay: 0.05
+  epochs: 800
+  batch_size: 32
+  mask_ratio: 0.25           # fraction of time bins masked in each training example
+  eval_every: 10
+published_test_split:        # NLB'21 paper, Table 2 (hidden test split, scored on EvalAI) - for context only
+  source: "Pei et al. 2021, Neural Latents Benchmark '21, arXiv:2109.04463, Table 2"
+  MC_Maze_Medium_co_bps: {Smoothing: 0.167, GPFA: 0.172, SLDS: 0.210, NDT: 0.259, AutoLFADS: 0.304}

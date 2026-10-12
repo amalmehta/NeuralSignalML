@@ -17,7 +17,7 @@ def kappa(y, yhat) -> float:
 
 def chance_upper(n_trials: int, n_classes: int, alpha: float = 0.05) -> float:
     """Accuracy a random classifier exceeds with probability alpha (Combrisson & Jerbi 2015).
-    With 288 trials and 4 classes this is ~29.5%, not 25%."""
+    With 288 trials and 4 classes this is ~29.2% (84/288), not 25%."""
     return float(stats.binom.ppf(1 - alpha, n_trials, 1 / n_classes) / n_trials)
 
 

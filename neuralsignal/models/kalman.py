@@ -61,6 +61,19 @@ class KalmanDecoder:
         self.P0 = np.cov(Xs[:, 0].T)
         return self
 
+    def renormalize(self, X: np.ndarray) -> "KalmanDecoder":
+        """Unsupervised day-to-day fix: use the new day's per-channel mean/std (no movement labels)."""
+        Z = X.reshape(-1, X.shape[-1]).astype(np.float64)
+        self.z_mean, self.z_std = Z.mean(0), Z.std(0) + 1e-3
+        return self
+
+    def refit_observation(self, X: np.ndarray, Y: np.ndarray, P: np.ndarray | None = None) -> "KalmanDecoder":
+        """Few-shot recalibration: keep the movement model (A, W) - the hand's physics don't change
+        overnight - and re-learn only how today's neurons encode it (H, Q) from a few labelled trials."""
+        fresh = KalmanDecoder(ridge=self.ridge, state=self.state, bin_s=self.bin_s).fit(X, Y, P)
+        self.H, self.Q, self.z_mean, self.z_std = fresh.H, fresh.Q, fresh.z_mean, fresh.z_std
+        return self
+
     def predict(self, X: np.ndarray) -> np.ndarray:
         """Run the filter independently on each trial. Returns (trials, bins, 2)."""
         Z = (X.astype(np.float64) - self.z_mean) / self.z_std

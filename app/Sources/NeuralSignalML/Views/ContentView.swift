@@ -108,9 +108,10 @@ struct RecordingView: View {
                 SpectrogramView(rec: rec).tabItem { Text("Spectrogram") }.tag("spectrogram")
                 DecodeView(rec: rec, jump: { t in model.viewStart = max(0, t - windowSeconds * 0.3); tab = "signals" })
                     .tabItem { Text("Decode") }.tag("decode")
+                LiveView(rec: rec).tabItem { Text("Live") }.tag("live")
             }
             .padding(8)
-            if tab != "decode" { TimeNavigator(rec: rec) }
+            if tab != "decode" && tab != "live" { TimeNavigator(rec: rec) }
         }
         .navigationTitle(rec.isSpikes ? "MC_Maze Medium" : rec.meta.id)
         .navigationSubtitle(rec.info.title)

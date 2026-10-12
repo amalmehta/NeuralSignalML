@@ -183,6 +183,15 @@ def run_spikes(cfg: dict, out: Path, log=print) -> dict:
 
 def run(config_path: str, log=print) -> dict:
     cfg = cfgmod.load_config(config_path)
+    if cfg["experiment"] == "crossday":
+        from neuralsignal import crossday
+        return crossday.run(config_path, log)
+    if cfg["experiment"] in ("closedloop", "nlb"):
+        from neuralsignal import closedloop, nlb
+        return (closedloop if cfg["experiment"] == "closedloop" else nlb).run(config_path, log)
+    if cfg["experiment"] == "eeg_calibration":
+        from neuralsignal import eeg_calibration
+        return eeg_calibration.run(config_path, log)
     out = RESULTS_DIR / "runs" / cfg["id"]
     cfgmod.write_run_header(cfg, out)
     log(f"== {cfg['name']}  (config {cfg['_source']}, hash {cfg['_hash']})")

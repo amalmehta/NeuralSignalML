@@ -1,0 +1,33 @@
+# Decoders that survive across days: train on one MC_Maze recording day, decode another.
+id: spikes-crossday
+name: Spikes - across days
+experiment: crossday
+days: [small, medium, large]       # 2009-09-28, 2009-09-29, 2009-10-06 - same monkey, same arrays
+decoders: [kalman, gru]
+seeds: [0, 1, 2]                   # GRU initialisation + which few-shot trials are drawn
+threads: 1
+preprocess:                        # identical to the single-day spike experiments
+  bin_ms: 50
+  lag_ms: 100
+  pre_ms: 750
+  post_ms: 450
+  score_pre_ms: 250
+min_rate_hz: 0.5                   # a decoder reads the channels that fired on its training day
+latent_dim: 12                     # factor-analysis dimensions for latent alignment
+stable_fraction: 0.6               # channels kept as "stable" when aligning (Degenhart et al. 2020)
+fewshot_k: [5, 10, 20, 40]         # labelled trials from the new day
+finetune_epochs: 150
+kalman:
+  ridge: 0.001
+  state: [velocity, position, acceleration]
+gru:
+  hidden: 128
+  layers: 1
+  dropout: 0.3
+  input_dropout: 0.2
+  lr: 0.002
+  weight_decay: 0.0001
+  batch_size: 16
+  max_epochs: 400
+  patience: 60
+  val_frac: 0.2

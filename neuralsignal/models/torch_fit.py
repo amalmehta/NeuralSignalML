@@ -100,18 +100,48 @@ class EEGNetClassifier:
 class GRURegressor:
     def __init__(self, hidden=128, layers=1, dropout=0.3, input_dropout=0.2, lr=2e-3,
                  weight_decay=1e-4, batch_size=16, max_epochs=400, patience=60, val_frac=0.2,
-                 seed=0, log=None):
+                 seed=0, log=None, input_transform="sqrt"):
         self.kw = dict(hidden=hidden, layers=layers, dropout=dropout, input_dropout=input_dropout)
         self.seed, self.val_frac, self.log = seed, val_frac, log
+        self.input_transform = input_transform  # "sqrt" for spike counts, "none" for latent factors
         self.train_kw = dict(lr=lr, weight_decay=weight_decay, batch_size=batch_size,
                              max_epochs=max_epochs, patience=patience, seed=seed)
 
+    def _t(self, X):
+        return np.sqrt(X) if getattr(self, "input_transform", "sqrt") == "sqrt" else X
+
     def _x(self, X):
-        return ((np.sqrt(X) - self.mu) / self.sd).astype(np.float32)
+        return ((self._t(X) - self.mu) / self.sd).astype(np.float32)
+
+    def renormalize(self, X):
+        """Unsupervised day-to-day fix: per-channel statistics from the new day's unlabelled data."""
+        S = self._t(X).reshape(-1, X.shape[-1])
+        self.mu, self.sd = S.mean(0), S.std(0) + 1e-3
+        return self
+
+    def finetune_input(self, X, Y, score_mask=None, epochs=150, lr=3e-3):
+        """Few-shot recalibration: re-learn only the input layer (how today's channels map into
+        the network) on a few labelled trials; the recurrent dynamics and readout stay frozen."""
+        self.renormalize(X)
+        mask = torch.as_tensor(np.ones(X.shape[1], bool) if score_mask is None else score_mask)
+        for name, prm in self.model.named_parameters():
+            prm.requires_grad = name.startswith("inp.")
+        opt = torch.optim.Adam([p for p in self.model.parameters() if p.requires_grad], lr=lr, weight_decay=1e-3)
+        Xs, Ys = torch.as_tensor(self._x(X)), torch.as_tensor((Y / self.y_sd).astype(np.float32))
+        torch.manual_seed(self.seed)
+        self.model.train()
+        for _ in range(epochs):
+            opt.zero_grad()
+            loss = ((self.model(Xs) - Ys)[:, mask] ** 2).mean()
+            loss.backward()
+            opt.step()
+        for prm in self.model.parameters():
+            prm.requires_grad = True
+        return self
 
     def fit(self, X, Y, score_mask=None):
         rng = np.random.default_rng(self.seed)
-        S = np.sqrt(X).reshape(-1, X.shape[-1])
+        S = self._t(X).reshape(-1, X.shape[-1])
         self.mu, self.sd = S.mean(0), S.std(0) + 1e-3
         self.y_sd = float(Y.std())
         mask = torch.as_tensor(np.ones(X.shape[1], bool) if score_mask is None else score_mask)

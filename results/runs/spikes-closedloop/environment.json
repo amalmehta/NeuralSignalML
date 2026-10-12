@@ -1,0 +1,12 @@
+{
+  "python": "3.11.3",
+  "platform": "macOS-26.6.2-x86_64-i386-64bit",
+  "machine": "x86_64",
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "scikit-learn": "1.5.2",
+    "torch": "2.2.2",
+    "pynwb": "4.2.0"
+  }
+}

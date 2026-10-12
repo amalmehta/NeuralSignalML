@@ -31,8 +31,19 @@ def bin_counts(spike_times: list[np.ndarray], edges: np.ndarray) -> np.ndarray:
     return np.stack([np.histogram(st, edges)[0] for st in spike_times], axis=1).astype(np.float32)
 
 
+def by_electrode(counts: np.ndarray, unit_electrode: np.ndarray, n_electrodes: int) -> np.ndarray:
+    """Sum the units sorted from each electrode: (..., units) -> (..., electrodes).
+
+    Sorted units change from day to day (different neurons drift in and out), but the
+    electrodes don't, so electrode-level counts give every day the same input space.
+    """
+    out = np.zeros((*counts.shape[:-1], n_electrodes), counts.dtype)
+    np.add.at(np.moveaxis(out, -1, 0), unit_electrode, np.moveaxis(counts, -1, 0))
+    return out
+
+
 def segment_trials(sess: SpikeSession, *, bin_ms=20, lag_ms=100, pre_ms=750, post_ms=450,
-                   score_pre_ms=250) -> TrialSegments:
+                   score_pre_ms=250, electrodes: int | None = None) -> TrialSegments:
     """One fixed-length segment per trial: [onset - pre_ms, onset + post_ms].
 
     The first (pre_ms - score_pre_ms) are warm-up for the decoder's state; R^2 is
@@ -47,7 +58,8 @@ def segment_trials(sess: SpikeSession, *, bin_ms=20, lag_ms=100, pre_ms=750, pos
         if not np.isfinite(onset):
             continue
         edges = onset - pre_ms / 1000 + bin_s * np.arange(n_bins + 1)
-        X.append(bin_counts(sess.spike_times, edges - lag_s))
+        c = bin_counts(sess.spike_times, edges - lag_s)
+        X.append(by_electrode(c, sess.unit_electrode, electrodes) if electrodes else c)
         idx = np.searchsorted(sess.behavior_t, edges)
         vel = np.stack([np.nanmean(sess.hand_vel[a:b], axis=0) for a, b in zip(idx[:-1], idx[1:])])
         Y.append(vel.astype(np.float32))

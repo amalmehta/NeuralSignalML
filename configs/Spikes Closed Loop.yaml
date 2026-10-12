@@ -1,0 +1,35 @@
+# Simulated closed-loop cursor control with neurons fitted to MC_Maze Medium.
+id: spikes-closedloop
+name: Spikes - simulated closed loop
+experiment: closedloop
+decoders: [kalman, gru]
+seeds: [0, 1, 2]
+threads: 1
+preprocess: {bin_ms: 50, lag_ms: 100, pre_ms: 750, post_ms: 450, score_pre_ms: 250}
+simulation:
+  bin_ms: 50
+  n_targets: 8
+  reps: 5                    # 40 reaches per decoder per seed
+  target_dist_mm: 100        # MC_Maze reaches are ~100 mm
+  target_radius_mm: 15
+  hold_ms: 250
+  timeout_s: 3.0
+  feedback_delay_ms: 100     # visual feedback delay of the simulated user
+  gain: 6.0                  # proportional controller: intended velocity = gain x (target - seen cursor)
+  max_speed: 600             # mm/s, about the monkey's peak reach speed
+  motor_noise: 40            # mm/s, per bin
+  warmup_bins: 10
+kalman:
+  ridge: 0.001
+  state: [velocity, position, acceleration]
+gru:
+  hidden: 128
+  layers: 1
+  dropout: 0.3
+  input_dropout: 0.2
+  lr: 0.002
+  weight_decay: 0.0001
+  batch_size: 16
+  max_epochs: 400
+  patience: 60
+  val_frac: 0.2
