@@ -141,8 +141,8 @@ def run(config_path: str, log=print) -> dict:
                        median_path_efficiency=float(np.median([t["path_efficiency"] for t in succ])) if succ else None,
                        n_trials=len(trials))
             rows.append(row)
-            paths[f"{kind}/seed{seed}"] = [dict(angle=t["target_angle"], success=t["success"], path=t["path"])
-                                           for t in trials if t["rep"] == 0]
+            paths[f"{kind}/seed{seed}"] = [dict(angle=t["target_angle"], rep=t["rep"], success=t["success"], path=t["path"])
+                                           for t in trials]  # every reach, so the figure isn't a hand-picked subset
             log(f"  {kind:6s} seed {seed}: offline R2 {offline:.3f} | closed loop: success {row['success_rate']*100:.0f}%, "
                 f"median time {row['median_time_s']}, path efficiency {row['median_path_efficiency']}")
     summary = dict(name=cfg["name"], id=cfg["id"], experiment="closedloop", config_hash=cfg["_hash"],

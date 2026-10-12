@@ -149,6 +149,12 @@ def train_ndt(d: NLBData, cfg: dict, seed: int = 0, log=None):
     n_in, n_out, nb = d.heldin.shape[-1], d.heldout.shape[-1], d.heldin.shape[1]
     m = cfg["model"]
     model = NDT(n_in, n_out, nb, **m)
+    # Start every neuron at its mean training rate. With the default init the readout predicts ~1 spike
+    # per 5 ms bin (about 50x too high) and most of a CPU-sized training budget goes on unlearning that.
+    with torch.no_grad():
+        mean_rate = Yall[fit].reshape(-1, n_in + n_out).mean(0).clamp_min(1e-4)
+        model.readout.bias.copy_(torch.log(mean_rate))
+        model.readout.weight.mul_(0.1)
     opt = torch.optim.AdamW(model.parameters(), lr=cfg["lr"], weight_decay=cfg["weight_decay"])
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=cfg["lr"], total_steps=cfg["epochs"] * math.ceil(len(fit) / cfg["batch_size"]))
     pois = nn.PoissonNLLLoss(log_input=True, full=False, reduction="none")
@@ -164,7 +170,11 @@ def train_ndt(d: NLBData, cfg: dict, seed: int = 0, log=None):
             zero = mask & (torch.rand(x.shape[:2]) < 0.8)
             x[zero] = 0
             loss = pois(model(x), Yall[b])
-            loss = loss[mask].mean() if cfg.get("loss_on_masked_only", True) else loss.mean()
+            # held-in neurons: scored only where their input was masked (BERT-style, so the model can't
+            # just copy its input); held-out neurons are never in the input, so score them everywhere.
+            # (Scoring held-out neurons only at masked bins left them untrained for unmasked input: co-bps ~0.)
+            loss = torch.cat([loss[..., :n_in][mask].reshape(-1), loss[..., n_in:].reshape(-1)]).mean() \
+                if cfg.get("loss_on_masked_only", True) else loss.mean()
             opt.zero_grad()
             loss.backward()
             nn.utils.clip_grad_norm_(model.parameters(), 200)

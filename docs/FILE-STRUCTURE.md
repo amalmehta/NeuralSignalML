@@ -8,14 +8,24 @@ Neural Signal ML/
 │   ├── EEG CSP LDA.yaml
 │   ├── EEG EEGNet.yaml
 │   ├── Spikes Kalman.yaml
-│   └── Spikes GRU.yaml
+│   ├── Spikes GRU.yaml
+│   ├── Spikes Cross Day.yaml        decoders across recording days
+│   ├── EEG Without Calibration.yaml alignment + calibration curve for a new person
+│   ├── Spikes NDT Benchmark.yaml    NLB co-smoothing: Smoothing vs Neural Data Transformer
+│   └── Spikes Closed Loop.yaml      simulated closed-loop cursor control
 ├── neuralsignal/                the Python pipeline
 │   ├── cli.py                   `neuralsignal download | train | report | spikesort | app`
 │   ├── paths.py                 where data, results and figures live
 │   ├── config.py                load configs, seed everything, record the environment
 │   ├── experiments.py           evaluation protocols: train, score, save models
 │   ├── report.py                Results.md tables + all figures
-│   ├── bridge.py                JSON helper the Mac app calls
+│   ├── bridge.py                JSON helper the Mac app calls (incl. `stream` for live decoding)
+│   ├── crossday.py              train on one recording day, decode another; adaptation methods
+│   ├── eeg_calibration.py       decode a new person with little or no labelled data
+│   ├── nlb.py                   Neural Latents Benchmark protocol, Smoothing baseline, NDT
+│   ├── closedloop.py            closed-loop cursor simulator (fitted neurons + simulated user)
+│   ├── latency.py               time every decoder running online
+│   ├── report_phase2.py         figures + tables for the experiments above
 │   ├── data/
 │   │   ├── download.py          fetch BCI 2a (BNCI) and MC_Maze (DANDI)
 │   │   ├── bci2a.py             read 2a .mat sessions into runs/trials
@@ -28,6 +38,8 @@ Neural Signal ML/
 │   │   ├── eegnet.py            EEGNet CNN
 │   │   ├── kalman.py            Kalman filter velocity decoder
 │   │   ├── rnn.py               GRU velocity decoder
+│   │   ├── riemann.py           covariance geometry: alignment, Riemannian mean, tangent space
+│   │   ├── streaming.py         bin-by-bin (online) versions of every decoder
 │   │   ├── torch_fit.py         shared training loop + sklearn-style wrappers
 │   │   └── registry.py          save/load models with their metadata
 │   ├── evaluation/metrics.py    accuracy, kappa, chance level, R², bootstrap, Wilcoxon
@@ -39,7 +51,7 @@ Neural Signal ML/
 │   ├── make_icon.py             draws the app icon
 │   ├── Resources/               AppIcon.icns
 │   ├── Sources/SignalCore/      filters, spectrogram, decimation (no UI; unit tested)
-│   ├── Sources/NeuralSignalML/  SwiftUI app: model, Python bridge, views, settings, feedback
+│   ├── Sources/NeuralSignalML/  SwiftUI app: model, Python bridge, views (Signals, Spectrogram, Live, Decode), settings, feedback
 │   └── Tests/SignalCoreTests/
 ├── docs/
 │   ├── INSTRUCTIONS.md          setup, run, use

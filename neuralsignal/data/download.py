@@ -2,6 +2,7 @@
 
 BCI Competition IV 2a  -> data/bci2a/A01T.mat ... A09E.mat   (BNCI Horizon 2020 mirror)
 NLB MC_Maze Medium     -> data/mc_maze_medium/*.nwb           (DANDI archive, dandiset 000139)
+NLB MC_Maze Small/Large -> data/mc_maze_small|large/*.nwb     (other days, same monkey; dandisets 000140, 000138)
 """
 from __future__ import annotations
 
@@ -54,11 +55,26 @@ def download_mc_maze() -> Path:
     return out
 
 
+MC_MAZE_SESSIONS = {  # other recording days of the same monkey (DANDI asset ids of the train files)
+    "small": "7821971e-c6a4-4568-8773-1bfa205c13f8",   # 2009-09-28, dandiset 000140
+    "large": "e67b57b2-e9ad-4d95-b9e3-1262997360dc",   # 2009-10-06, dandiset 000138
+}
+
+
+def download_mc_maze_sessions() -> None:
+    """MC_Maze Small and Large: the extra days used by the cross-day experiment (~180 MB)."""
+    print("NLB MC_Maze Small + Large (other days, same monkey)")
+    for name, aid in MC_MAZE_SESSIONS.items():
+        _fetch(f"https://api.dandiarchive.org/api/assets/{aid}/download/",
+               DATA_DIR / f"mc_maze_{name}" / f"sub-Jenkins_ses-{name}_desc-train_behavior+ecephys.nwb")
+
+
 def main(which: str = "all") -> None:
     if which in ("all", "bci2a"):
         download_bci2a()
     if which in ("all", "mc_maze"):
         download_mc_maze()
+        download_mc_maze_sessions()
 
 
 if __name__ == "__main__":

@@ -51,7 +51,7 @@ These are followed by pooling (a power envelope), a separable convolution and a 
 - **Held-out session:** train on a person's day 1 and test on their day 2. EEG drifts between days (electrode placement, impedance, fatigue), so this is harder than cross-validation within one day, which many papers report.
 - **Held-out subject:** train on the other 8 people and test on someone the model has never seen. This is the "no calibration" scenario.
 
-Chance is 25%. With 288 test trials, a random classifier exceeds 29.5% only 5% of the time, so that is the real bar.
+Chance is 25%. With 288 test trials, a random classifier exceeds 29.2% (84 of 288) only 5% of the time, so that is the real bar.
 
 ![EEG accuracy](figures/eeg-accuracy-by-subject.png)
 
@@ -143,11 +143,137 @@ MC_Maze arrives already sorted, so this demo shows the upstream step on a simula
 
 ---
 
+## 4. Decoders that survive across days
+
+### The problem
+
+An implanted array records a slightly different set of neurons every day: electrodes shift by micrometres, cells go quiet, and new ones appear. A decoder fitted on Monday is miscalibrated by Tuesday. Clinical systems handle this by recalibrating at the start of every session, which costs the user minutes of their time every day. How much does drift cost, and how much can be recovered without asking the user for anything?
+
+### Setup
+
+MC_Maze comes in three sizes, which are actually **three recording days from the same monkey on the same two Utah arrays**: Sep 28 (Small, 100 trials), Sep 29 (Medium, 250) and Oct 6 2009 (Large, 500). Pairing them gives gaps of 1 day and 7–8 days.
+
+**A shared input space.** Sorted units are different on each day, so every decoder reads spike counts summed per **electrode**. To check that electrodes really correspond across days, I fitted each electrode's preferred reach direction on each day. On well-tuned electrodes it moves only 20–32° between days, against 90° expected if the mapping were scrambled. Mean firing rates correlate only about 0.3 across days, though, so the drift is real.
+
+**Methods,** for every ordered pair of days (6 pairs). Each decoder reads the channels that fired on its training day. All methods are tested on the new day's NLB val trials, which no method ever sees.
+- **Recalibrated:** trained on the new day's own training trials. This is the reference.
+- **Old decoder as is:** what happens if you just keep going.
+- **Re-normalise (no labels):** replace each channel's mean and standard deviation with the new day's. It needs only the new day's spikes, not any movement data.
+- **Latent alignment (no labels; Degenhart et al. 2020):**
+  1. Fit factor analysis on each day.
+  2. Rotate the new day's factors onto the old day's, using the channels whose loadings agree best.
+  3. Keep the decoder that was trained on the old day's factors.
+- **Few-shot recalibration:** k labelled trials from the new day.
+  - Kalman: refit only the observation model (how neurons encode movement), keeping the movement dynamics.
+  - GRU: refit only the input layer, keeping the recurrent dynamics and readout.
+  - Both are compared with training from scratch on the same k trials.
+
+![Cross-day methods](figures/crossday-methods.png)
+
+![Few-shot recalibration](figures/crossday-fewshot.png)
+
+| Mean over 6 day pairs (R²) | Kalman | GRU |
+|---|---|---|
+| Recalibrated on the new day | 0.50 | 0.77 |
+| Old decoder as is | **−0.19** | 0.19 |
+| Re-normalise (0 labels) | 0.25 | **0.43** |
+| Latent alignment (0 labels) | 0.09 | 0.32 |
+| Refit with 10 labelled trials / from scratch | 0.18 / 0.19 | **0.49 / 0.21** |
+| Refit with 40 labelled trials / from scratch | 0.41 / 0.41 | **0.65 / 0.58** |
+
+**What we learned**
+- **Drift is severe.** An unadapted Kalman filter is worse than predicting zero velocity (negative R²), even one day later. The GRU degrades less but still loses three-quarters of its performance.
+- **The cheapest fix is the best zero-label fix.** Re-normalising each channel with the new day's statistics needs no labels and no user effort. It recovers 64% of the lost R² for the Kalman filter and 41% for the GRU, more than latent alignment does here.
+- **Why latent alignment underperforms here.** Two measurable reasons:
+  - Compressing about 70 electrodes into 12 factors already costs a lot. A same-day latent Kalman reaches only 0.33, against 0.50 on raw channels.
+  - Alignment assumes most channels are stable. Here the neurons change on most electrodes, which matches the low rate correlation.
+
+  The method was designed for chronic arrays recorded continuously over weeks; this data has gaps and only about 70 active electrodes.
+- **Reusing the old network beats starting over, for the GRU.** With 10 labelled trials (under half a minute of reaching), refitting only the GRU's input layer gives 0.49, against 0.21 from scratch. The network's learned movement dynamics carry over between days; only the mapping from electrodes changes. The Kalman filter gets no such benefit: its movement model is only a few numbers and is re-learned easily from a few trials, so refitting H and Q ≈ refitting everything.
+
+## 5. Real-time decoding and closed-loop use
+
+### Online latency
+
+A real BCI decodes each bin of spikes as it arrives (every 50 ms here) and must finish before the next one. Both spike decoders are causal, so running them bin by bin gives *exactly* their offline predictions; a test checks this. What changes is that each update must be fast.
+
+| Decoder | Median per update | 95th percentile | Budget |
+|---|---|---|---|
+| Kalman filter | 0.08 ms | 0.25 ms | 50 ms |
+| GRU | 1.6 ms | 17 ms | 50 ms |
+| CSP + LDA (sliding 2 s window every 250 ms) | 3.0 ms | 17 ms | 250 ms |
+| EEGNet (same) | 6.1 ms | 30 ms | 250 ms |
+
+These were measured single-threaded on a heavily loaded Intel laptop (load average about 75). Two engineering lessons came out of getting there:
+- **Precompute the Kalman gain.** The textbook update solves a 152×152 linear system every bin, which took a median 28 ms and 146 ms at the 95th percentile here, too slow. But the Kalman gain depends only on the model, never on the spikes, so the whole sequence of gains can be computed before decoding starts. Each update then becomes a few matrix-vector products: 0.08 ms, with identical output. This is standard in clinical systems.
+- **One thread for one update.** PyTorch's default of one thread per core cost the GRU 47 ms per update, because coordinating threads is slower than the work itself. Pinning it to one thread brings it to 1.6 ms.
+
+The Mac app's **Live** tab runs any decoder this way and plays the output back in real time (a cursor driven by decoded spikes, or motor-imagery probabilities updating every 250 ms), with these latencies measured live.
+
+### Simulated closed loop
+
+Offline, a decoder predicts movements the arm actually made. In a real BCI there is no arm. The user watches the cursor the decoder produces and corrects it, so decoder errors feed back into the neural activity. It's well known that offline accuracy predicts this closed-loop performance poorly (Koyama et al. 2010). To probe it without a participant, I built a closed-loop simulator in the spirit of Cunningham et al. (2011):
+
+- **Neurons:** each MC_Maze unit's tuning to intended velocity, fitted on real data with a Poisson GLM.
+- **User:** sees the cursor 100 ms late (visual delay), steers toward the target with a proportional controller capped at the monkey's real peak speed, and adds motor noise.
+- **Task:** 8 targets 100 mm away; success means holding inside a 15 mm target for 250 ms within 3 s.
+- **Decoders:** trained the normal way on simulated open-loop data, then put in the loop.
+
+![Closed loop](figures/closedloop.png)
+
+| | Offline R² | Closed-loop success | Median time to target |
+|---|---|---|---|
+| Kalman filter | 0.52 | **39%** | 1.6 s |
+| GRU | 0.57 | **61%** | 1.9 s |
+
+A 0.05 difference in offline R² becomes a **22-point** difference in closed-loop success. Small offline errors compound when the user has to correct for them in real time. The ranking agrees with offline R², but its size doesn't, which is why the field judges BCIs on closed-loop task performance.
+
+**Caveat:** this is a simulated user with simple GLM neurons. Real neurons have richer dynamics, and real users learn the decoder, which often helps simpler decoders more. The simulator ranks decoders under a stated model. It is not a substitute for a user study.
+
+## 6. EEG that works without calibration
+
+### The problem
+
+In section 1, decoding someone the model had never seen (held-out subject) dropped CSP + LDA from 64% to 44%. That gap is what stops EEG BCIs working "out of the box": today a new user must first record a labelled calibration session, typically 20–30 minutes of imagining on cue. Can we close the gap with no labels, or very few?
+
+### Why people differ, and the fix
+
+Every head is different (skull thickness, electrode fit, baseline rhythms), so each person's EEG covariance matrices sit in a different region of the space of covariance matrices. A decoder trained on other people sees a new person's data as *shifted*. **Alignment** removes the shift without labels: estimate where this person's data is centred (their mean covariance, from any *unlabelled* EEG), and move it to a common reference point.
+
+- **Euclidean alignment** (He & Wu 2019): whiten each person's trials with the inverse square root of their average covariance. Afterwards, everyone's mean covariance is the identity.
+- **Riemannian re-centring** (Zanini et al. 2018): the same idea using the *Riemannian* mean, the right notion of "average" for covariance matrices, because their space is curved. Classification then uses tangent vectors (the matrix logarithm at the re-centred origin) and LDA.
+
+Protocol: each person's day-2 session is the test set. Their day-1 EEG is "the first minutes of using the BCI": it is used *unlabelled* for alignment, and in the calibration curve k labelled trials per class are drawn from it. Training uses the other 8 people, each session aligned to itself.
+
+![EEG calibration](figures/eeg-calibration.png)
+
+| Zero calibration (trained on 8 other people) | Accuracy | Better than CSP + LDA on |
+|---|---|---|
+| CSP + LDA | 44.3% | n/a |
+| Tangent space + LDA, **no** re-centring | 40.0% | 2 of 9 people |
+| Euclidean-aligned CSP + LDA | 49.2% | 7 of 9 (Wilcoxon p = 0.039) |
+| Riemannian re-centred tangent space + LDA | 50.1% | 7 of 9 (p = 0.027) |
+| Euclidean-aligned EEGNet | **50.5%** | 8 of 9 (p = 0.012) |
+
+Then, adding labelled trials from the new person (Riemannian method):
+
+| Labelled trials from the new person | 0 | 20 | 40 | 80 | 160 | Full session (~270) |
+|---|---|---|---|---|---|---|
+| Others + new person, pooled | 50.1% | 50.6% | 51.0% | 52.1% | 53.8% | n/a |
+| New person only | n/a | 50.0% | 53.7% | 60.6% | **64.4%** | 67.0% |
+
+**What we learned**
+- **Alignment is the single biggest win for a new user, and it's free.** It needs only a few minutes of unlabelled EEG. Accuracy goes from 44% to 50%, consistently across people. EEGNet benefits most: 43.2% unaligned (section 1) against 50.5% aligned.
+- **The control proves the mechanism.** The same tangent-space classifier *without* per-person re-centring does worse than CSP (40%). Removing each person's shift is what matters, not the classifier.
+- **Pooling a little labelled data with everyone else's barely helps** (+3.7 points at 160 trials), because 160 trials are swamped by about 4,500 from other people. From about **40 labelled trials (10 per class, roughly 5 minutes of cued imagery) onward, the new person's own data alone wins.** With 160 trials (about 20 minutes) it reaches 64%, close to a full session.
+- **A practical recipe follows:** start a new user on an aligned cross-subject decoder (about 50% from minute one), then switch to their own data once they have about 40 labelled trials. A method that *weights* the new person's trials more heavily than other people's would probably beat both curves; that's a natural next experiment.
+- **Still far from solved.** Even aligned, three of nine people stay below 40%. Some people produce weak motor-imagery rhythms at any calibration level (see section 1).
+
 ## Honest caveats
 
-- **Offline decoding, not closed-loop control:** every number here is offline: decode recorded data, compare with what happened. In a live BCI the user sees the decoder's output and adapts to its errors, so offline R² or accuracy does not predict closed-loop performance well. That is why live systems are judged on task metrics such as bits per second, which this project does not measure.
+- **Closed loop is simulated, not measured with people:** the simulator (section 5) uses GLM neurons and a model user. Real users adapt to the decoder, and real closed-loop performance can differ substantially.
 - **Baselines, not state of the art:** this is a careful comparison of classic and standard neural decoders under honest splits. Stronger published models exist for both datasets; nothing here is meant to compete with them.
-- **One session for spikes:** all spike results are within one session. Decoders usually degrade across days, which isn't measured here.
+- **Three days, one monkey:** the cross-day results (section 4) cover gaps of 1 and 7–8 days in one animal. Longer gaps, other people and other arrays may behave differently.
 - **Small n for EEG statistics:** with 9 subjects, a Wilcoxon test can't go below p ≈ 0.004.
 - **Compute caps:** the held-out-subject EEGNet folds were capped at 80 epochs and one seed, because training ran on a heavily loaded CPU.
 - **Hand-written methods:** everything is implemented from scratch for clarity (no MNE, MOABB or pyRiemann). It's tested on synthetic data, but less battle-tested than those libraries.
@@ -160,5 +286,8 @@ MC_Maze arrives already sorted, so this demo shows the upstream step on a simula
 - Lawhern et al. (2018), *EEGNet: a compact convolutional neural network for EEG-based brain–computer interfaces*.
 - Wu et al. (2003), *Neural decoding of cursor motion using a Kalman filter*. Gilja et al. (2012), *A high-performance neural prosthesis enabled by control algorithm design*.
 - Schlögl et al. (2007), *A fully automated correction method of EOG artifacts in EEG recordings*.
+- He & Wu (2019), *Transfer learning for brain–computer interfaces: a Euclidean space data alignment approach*. Zanini et al. (2018), *Transfer learning: a Riemannian geometry framework with applications to brain–computer interfaces*. Barachant et al. (2012), *Multiclass brain–computer interface classification by Riemannian geometry*.
+- Degenhart et al. (2020), *Stabilization of a brain–computer interface via the alignment of low-dimensional spaces of neural activity*.
+- Cunningham et al. (2011), *A closed-loop human simulator for investigating the role of feedback control in brain-machine interfaces*. Koyama et al. (2010), *Comparison of brain–computer interface decoding algorithms in open-loop and closed-loop control*.
 - Haufe et al. (2014), *On the interpretation of weight vectors of linear models in multivariate neuroimaging*.
 - Quiroga, Nadasdy & Ben-Shaul (2004), *Unsupervised spike detection and sorting with wavelets and superparamagnetic clustering*.

@@ -22,9 +22,9 @@ def _load(run_id):
 
 # ------------------------------------------------------------------ cross-day
 
-CD_METHODS = [("within_day", "Recalibrated\n(same day)"), ("no_adaptation", "Yesterday's\ndecoder as is"),
-              ("renormalize", "Re-normalise\n(no labels)"), ("latent_align", "Latent alignment\n(no labels)"),
-              ("fewshot", "Refit with\n20 labelled trials")]
+CD_METHODS = [("within_day", "Recalibrated\non the\nnew day"), ("no_adaptation", "Old\ndecoder\nas is"),
+              ("renormalize", "Re-\nnormalise\n(no labels)"), ("latent_align", "Latent\nalignment\n(no labels)"),
+              ("fewshot", "Refit with\n20 labelled\ntrials")]
 
 
 def crossday(L):
@@ -33,7 +33,7 @@ def crossday(L):
         return
     df = pd.DataFrame(m["rows"])
     df = df[(df.k.isna()) | (df.k == 20) | (df.method == "within_day")]
-    fig, axes = plt.subplots(1, 2, figsize=(11, 3.4), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(12, 3.8), sharey=True)
     for ax, (gap_name, gaps) in zip(axes, [("1 day apart", [1]), ("7-8 days apart", [7, 8])]):
         x = np.arange(len(CD_METHODS))
         for j, dec in enumerate(["kalman", "gru"]):
@@ -73,6 +73,7 @@ def crossday(L):
         ax.text(41, ren, " re-normalise,\n 0 labels", va="center", fontsize=7, color="grey")
         ax.set_xscale("log")
         ax.set_xticks([5, 10, 20, 40], ["5", "10", "20", "40"])
+        ax.xaxis.set_minor_formatter(plt.NullFormatter())
         ax.set_xlabel("labelled trials from the new day")
         ax.set_title(LBL[dec])
         ax.set_ylim(-0.3, 0.9)
@@ -120,7 +121,9 @@ def eeg_calibration(L):
         ax.text(i, zero.loc[k].mean() * 100 + 1, f"{zero.loc[k].mean()*100:.1f}%", ha="center", fontsize=8)
         ax.scatter(np.full(9, i) + np.linspace(-0.2, 0.2, 9), zero.loc[k].values * 100, s=6, color="k", zorder=3)
     ax.axhline(m["chance_95"] * 100, color="grey", ls="--", lw=0.8)
-    ax.set_xticks(range(len(meths)), [EA[k][0].replace(" + ", "\n+ ").replace("-aligned ", "-aligned\n") for k in meths], fontsize=7)
+    short = {"csp_lda": "CSP\n+ LDA", "ea_csp_lda": "Euclidean-\naligned\nCSP + LDA", "ts_lda": "Tangent\nspace\n+ LDA",
+             "ra_ts_lda": "Riemannian\nre-centred\ntangent space", "ea_eegnet": "Euclidean-\naligned\nEEGNet"}
+    ax.set_xticks(range(len(meths)), [short[k] for k in meths], fontsize=7)
     ax.set_ylabel("accuracy on the new person (%)")
     ax.set_title("Zero calibration: trained on 8 other people")
     ax.set_ylim(0, 100)
@@ -201,16 +204,17 @@ def closedloop(L):
                                     t=("median_time_s", "mean"), eff=("median_path_efficiency", "mean"))
     fig, axes = plt.subplots(1, 3, figsize=(12, 3.6), gridspec_kw=dict(width_ratios=[1, 1, 1.1]))
     for ax, dec in zip(axes[:2], ["kalman", "gru"]):
-        for tr in m["paths"].get(f"{dec}/seed0", []):
+        reaches = m["paths"].get(f"{dec}/seed0", [])
+        for tr in sorted(reaches, key=lambda r: r["success"]):  # failures underneath
             p = np.array(tr["path"])
-            ax.plot(p[:, 0], p[:, 1], color=C[dec] if tr["success"] else "#d62728", lw=1)
-            a = np.radians(tr["angle"])
+            ax.plot(p[:, 0], p[:, 1], color=C[dec] if tr["success"] else "#d62728", lw=0.7, alpha=0.6)
+        for a in np.radians(np.linspace(0, 360, m["simulation"]["n_targets"], endpoint=False)):
             ax.add_patch(plt.Circle((100 * np.cos(a), 100 * np.sin(a)), m["simulation"]["target_radius_mm"],
-                                    fill=False, color="grey", lw=0.8))
+                                    fill=False, color="k", lw=1))
         ax.set_aspect("equal")
         ax.set_xlim(-150, 150)
         ax.set_ylim(-150, 150)
-        ax.set_title(f"{LBL[dec]}: {agg.loc[dec].succ*100:.0f}% of reaches succeed")
+        ax.set_title(f"{LBL[dec]}: all {len(reaches)} reaches, seed 0\n({agg.loc[dec].succ*100:.0f}% succeed over 3 seeds)", fontsize=9)
         ax.set_xlabel("mm")
     ax = axes[2]
     for dec in agg.index:

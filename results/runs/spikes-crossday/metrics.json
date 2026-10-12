@@ -1,0 +1,3818 @@
+{
+  "name": "Spikes - across days",
+  "id": "spikes-crossday",
+  "experiment": "crossday",
+  "config_hash": "4e99c7857f",
+  "minutes": 243.2,
+  "days": {
+    "small": "2009-09-28",
+    "medium": "2009-09-29",
+    "large": "2009-10-06"
+  },
+  "rows": [
+    {
+      "method": "within_day",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.46740302443504333,
+      "ci95": [
+        0.35413397699594495,
+        0.559342622756958
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.27447718381881714,
+      "ci95": [
+        0.17362113520503045,
+        0.349778938293457
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.49783316254615784,
+      "ci95": [
+        0.43594932854175567,
+        0.5527126684784889
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.3034796416759491,
+      "ci95": [
+        0.19988654889166355,
+        0.385822969675064
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.5399047136306763,
+      "ci95": [
+        0.4994561322033405,
+        0.576015618443489
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.42343437671661377,
+      "ci95": [
+        0.3769392840564251,
+        0.4606504701077938
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": -0.4809166193008423,
+      "ci95": [
+        -0.677885502576828,
+        -0.3294045135378838
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.2097748965024948,
+      "ci95": [
+        0.10435710735619068,
+        0.2986345015466213
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.16258925199508667,
+      "ci95": [
+        0.07602890972048044,
+        0.23554983250796785
+      ],
+      "stable_channels": 40
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 1.0,
+      "r2": -0.14693428575992584,
+      "ci95": [
+        -0.3155898302793503,
+        -0.021849492704495828
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 1.0,
+      "r2": -0.13036008179187775,
+      "ci95": [
+        -0.2961435571312904,
+        -0.006126072513870954
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.09894343465566635,
+      "ci95": [
+        -0.006572999048512429,
+        0.17869751639664172
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.1055084764957428,
+      "ci95": [
+        -0.005777757894247766,
+        0.18767740875482553
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.3573934733867645,
+      "ci95": [
+        0.2762088544666767,
+        0.426831292361021
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.3598950505256653,
+      "ci95": [
+        0.27449183687567713,
+        0.43289754763245575
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.3660268485546112,
+      "ci95": [
+        0.2830327719449997,
+        0.4257303975522518
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.389158695936203,
+      "ci95": [
+        0.3086203373968601,
+        0.4498028583824634
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": -0.34214264154434204,
+      "ci95": [
+        -0.4627325840294361,
+        -0.2286308988928795
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.20358793437480927,
+      "ci95": [
+        0.14849061332643032,
+        0.25017261467874047
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.06103147566318512,
+      "ci95": [
+        2.279851469214793e-06,
+        0.11293457150459288
+      ],
+      "stable_channels": 39
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 8.0,
+      "r2": -0.0229899100959301,
+      "ci95": [
+        -0.10386294201016426,
+        0.048527284711599304
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 8.0,
+      "r2": -0.009091031737625599,
+      "ci95": [
+        -0.091083718650043,
+        0.06106727672740814
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.13195745646953583,
+      "ci95": [
+        0.045113285072147846,
+        0.20444179959595202
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.1534254252910614,
+      "ci95": [
+        0.07257091235369444,
+        0.22166193239390847
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.361360639333725,
+      "ci95": [
+        0.3174587920308113,
+        0.40282362550497053
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.3600192964076996,
+      "ci95": [
+        0.3157886788249016,
+        0.40244568511843676
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.44743677973747253,
+      "ci95": [
+        0.40514297038316727,
+        0.48309860378503794
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.4534466862678528,
+      "ci95": [
+        0.4097395710647106,
+        0.49037917107343676
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.29154905676841736,
+      "ci95": [
+        0.16261581741273404,
+        0.3857115641236305
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.36148059368133545,
+      "ci95": [
+        0.2406327459961176,
+        0.4547525398433208
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.09599847346544266,
+      "ci95": [
+        -0.042524373251944775,
+        0.23665868304669854
+      ],
+      "stable_channels": 40
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 1.0,
+      "r2": -0.25435587763786316,
+      "ci95": [
+        -0.4792819187045097,
+        -0.08097742199897774
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 1.0,
+      "r2": -0.2964475154876709,
+      "ci95": [
+        -0.5388317674398422,
+        -0.10996897015720607
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.2976159155368805,
+      "ci95": [
+        0.1698702022433281,
+        0.38490075692534437
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.3023071885108948,
+      "ci95": [
+        0.1694696605205536,
+        0.39307356998324394
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.3740384578704834,
+      "ci95": [
+        0.26509456187486646,
+        0.44960882663726803
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.3756963312625885,
+      "ci95": [
+        0.27104429230093957,
+        0.45638969838619226
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.38183164596557617,
+      "ci95": [
+        0.2626559190452099,
+        0.473340967297554
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.37013906240463257,
+      "ci95": [
+        0.24080220907926558,
+        0.46186819970607756
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": -0.8252959847450256,
+      "ci95": [
+        -1.002728207409382,
+        -0.6642917633056642
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.24317267537117004,
+      "ci95": [
+        0.18227058723568917,
+        0.29451503008604046
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.02266167663037777,
+      "ci95": [
+        -0.056285809632390736,
+        0.09382819216698407
+      ],
+      "stable_channels": 41
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 7.0,
+      "r2": -0.07147873193025589,
+      "ci95": [
+        -0.1562894683331251,
+        -0.002798032824648574
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 7.0,
+      "r2": -0.07168783992528915,
+      "ci95": [
+        -0.1591328416019678,
+        -0.0016342962480848826
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.09243491291999817,
+      "ci95": [
+        -0.011157516622915864,
+        0.17022600471973415
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.11100888252258301,
+      "ci95": [
+        0.012720781122334303,
+        0.18694313764572143
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.36291518807411194,
+      "ci95": [
+        0.3196014352142811,
+        0.40154932066798205
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.36571916937828064,
+      "ci95": [
+        0.3230590231716633,
+        0.4032314673066139
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.44508635997772217,
+      "ci95": [
+        0.4007937952876091,
+        0.48588065952062603
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.4481939971446991,
+      "ci95": [
+        0.399468332529068,
+        0.4890567436814308
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.2651558816432953,
+      "ci95": [
+        0.13667739368975163,
+        0.35614325031638144
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.31005173921585083,
+      "ci95": [
+        0.17587292827665807,
+        0.40887277647852893
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.1633308380842209,
+      "ci95": [
+        0.012324477569200104,
+        0.25834356993436813
+      ],
+      "stable_channels": 39
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 8.0,
+      "r2": -0.37176376581192017,
+      "ci95": [
+        -0.6575960278511047,
+        -0.15934426151216052
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 8.0,
+      "r2": -0.38739675283432007,
+      "ci95": [
+        -0.683629398047924,
+        -0.17622419260442265
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.2700004279613495,
+      "ci95": [
+        0.14285128936171532,
+        0.3752921126782894
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.2782285809516907,
+      "ci95": [
+        0.14775789193809033,
+        0.39000049680471416
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.3648855686187744,
+      "ci95": [
+        0.26764812842011454,
+        0.4438763588666916
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.35631102323532104,
+      "ci95": [
+        0.2506659358739853,
+        0.4423986852169037
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.3900560736656189,
+      "ci95": [
+        0.2801636256277561,
+        0.4725527741014957
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.3856501877307892,
+      "ci95": [
+        0.269920839369297,
+        0.46820664256811134
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": -0.05592701956629753,
+      "ci95": [
+        -0.1328739073127508,
+        0.008593983715400086
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.18096484243869781,
+      "ci95": [
+        0.09342547729611397,
+        0.25231572985649103
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.011606954038143158,
+      "ci95": [
+        -0.0964362422004342,
+        0.10680672600865357
+      ],
+      "stable_channels": 41
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 7.0,
+      "r2": -0.23666049540042877,
+      "ci95": [
+        -0.4469373352825642,
+        -0.08301537446677706
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 7.0,
+      "r2": -0.23842638731002808,
+      "ci95": [
+        -0.44827539697289465,
+        -0.08496316187083754
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.21362854540348053,
+      "ci95": [
+        0.13687589578330517,
+        0.2756575047969817
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.2089594602584839,
+      "ci95": [
+        0.12638882026076317,
+        0.2750359550118446
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.3678763508796692,
+      "ci95": [
+        0.2906105563044548,
+        0.4300066247582435
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.3586920201778412,
+      "ci95": [
+        0.2757315322756767,
+        0.42462641596794126
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.40369492769241333,
+      "ci95": [
+        0.322250322252512,
+        0.4614901527762413
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "kalman",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.4121702015399933,
+      "ci95": [
+        0.3308603376150131,
+        0.46787997558712957
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "gru",
+      "source": "small",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.7050725221633911,
+      "ci95": [
+        0.5820628017187118,
+        0.7907510742545127
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "gru",
+      "source": "small",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.620921790599823,
+      "ci95": [
+        0.4404017835855484,
+        0.7513201564550399
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.7055825591087341,
+      "ci95": [
+        0.6174867153167725,
+        0.7846455067396164
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.6776780486106873,
+      "ci95": [
+        0.5794493198394776,
+        0.746307823061943
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "gru",
+      "source": "large",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.8626043796539307,
+      "ci95": [
+        0.8383398130536079,
+        0.8831460297107696
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "gru",
+      "source": "large",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.8784605264663696,
+      "ci95": [
+        0.8567599058151245,
+        0.8957665145397187
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.2545590400695801,
+      "ci95": [
+        0.1999855823814869,
+        0.2976436160504818
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.42651936411857605,
+      "ci95": [
+        0.33934007212519646,
+        0.4846515215933323
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.22815892100334167,
+      "ci95": [
+        0.04182024532929063,
+        0.37708962783217426
+      ],
+      "stable_channels": 40
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 1.0,
+      "r2": 0.3912231922149658,
+      "ci95": [
+        0.3096983753144741,
+        0.45961653068661684
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.4789341390132904,
+      "ci95": [
+        0.4007097654044628,
+        0.5447420164942741
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.12607716023921967,
+      "ci95": [
+        0.054644279275089504,
+        0.1849556442350149
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.5765272974967957,
+      "ci95": [
+        0.5055455952882767,
+        0.6412533327937125
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.43028563261032104,
+      "ci95": [
+        0.35161311402916906,
+        0.49670669361948966
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.5639224052429199,
+      "ci95": [
+        0.4751202590763569,
+        0.6300131902098656
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.45601126551628113,
+      "ci95": [
+        0.3520472750067711,
+        0.5408473744988441
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.02603188157081604,
+      "ci95": [
+        -0.05501274475827813,
+        0.09405460171401499
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.33713242411613464,
+      "ci95": [
+        0.27444435507059095,
+        0.388869322091341
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.2506565749645233,
+      "ci95": [
+        0.14056651704013348,
+        0.34491298198699943
+      ],
+      "stable_channels": 39
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 8.0,
+      "r2": 0.47399917244911194,
+      "ci95": [
+        0.40763168334960936,
+        0.5247965469956398
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.4395282566547394,
+      "ci95": [
+        0.3573167026042938,
+        0.5162950456142424
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.21290762722492218,
+      "ci95": [
+        0.17600529305636883,
+        0.24285788834095
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.5931401252746582,
+      "ci95": [
+        0.5401599317789078,
+        0.639630489051342
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.45103123784065247,
+      "ci95": [
+        0.41262500584125517,
+        0.4837386049330234
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.664707362651825,
+      "ci95": [
+        0.6087133586406708,
+        0.7116050526499749
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.646244466304779,
+      "ci95": [
+        0.6039520010352135,
+        0.6840944841504097
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.10738061368465424,
+      "ci95": [
+        -0.16019762121140957,
+        0.29494270756840685
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.6217668056488037,
+      "ci95": [
+        0.510988573729992,
+        0.7181626141071319
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.4807187020778656,
+      "ci95": [
+        0.3589189723134041,
+        0.5818409606814384
+      ],
+      "stable_channels": 40
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 1.0,
+      "r2": 0.4272296130657196,
+      "ci95": [
+        0.22938015200197698,
+        0.5761115729808807
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.6614640951156616,
+      "ci95": [
+        0.5128228947520256,
+        0.7716121077537537
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.31535616517066956,
+      "ci95": [
+        0.19330454356968402,
+        0.43912934213876714
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.7180739641189575,
+      "ci95": [
+        0.6169458046555519,
+        0.7911992132663727
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.44800451397895813,
+      "ci95": [
+        0.34290342032909393,
+        0.535537077486515
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.7484215497970581,
+      "ci95": [
+        0.6434484675526619,
+        0.8245729386806487
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.5668700933456421,
+      "ci95": [
+        0.4574287921190262,
+        0.6543049350380897
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.03707067668437958,
+      "ci95": [
+        -0.060557229537516834,
+        0.12481920942664144
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.37773028016090393,
+      "ci95": [
+        0.2814855702221394,
+        0.46861307695508003
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.34337925910949707,
+      "ci95": [
+        0.24077449962496758,
+        0.440010741353035
+      ],
+      "stable_channels": 41
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 7.0,
+      "r2": 0.39157259464263916,
+      "ci95": [
+        0.30747517496347426,
+        0.4708511389791965
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.5124668478965759,
+      "ci95": [
+        0.4373632200062275,
+        0.5825615584850311
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.17655976116657257,
+      "ci95": [
+        0.10473583489656449,
+        0.23235950432717797
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.6334547400474548,
+      "ci95": [
+        0.5770384401082993,
+        0.6816519722342491
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.4070597290992737,
+      "ci95": [
+        0.35575052052736283,
+        0.4485558114945888
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.705391526222229,
+      "ci95": [
+        0.653486005961895,
+        0.7511272698640823
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.6598971486091614,
+      "ci95": [
+        0.617009525001049,
+        0.6915878102183342
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.14110302925109863,
+      "ci95": [
+        0.009330333909019833,
+        0.22686441987752914
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.45889580249786377,
+      "ci95": [
+        0.2696332208812237,
+        0.5988032773137092
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.4351506531238556,
+      "ci95": [
+        0.27583219185471536,
+        0.5763057723641395
+      ],
+      "stable_channels": 39
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 8.0,
+      "r2": 0.5905382633209229,
+      "ci95": [
+        0.4458798423409462,
+        0.7075893938541412
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.613775372505188,
+      "ci95": [
+        0.44850315153598785,
+        0.7323674231767654
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.2974220812320709,
+      "ci95": [
+        0.15298639014363288,
+        0.4344849407672882
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.5834664702415466,
+      "ci95": [
+        0.3721102759242058,
+        0.736150997877121
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.40862011909484863,
+      "ci95": [
+        0.32023410946130754,
+        0.49575558826327326
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.6776289343833923,
+      "ci95": [
+        0.5216593906283379,
+        0.7925418585538864
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.5813097953796387,
+      "ci95": [
+        0.49853539690375326,
+        0.6555049419403076
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.21649497747421265,
+      "ci95": [
+        0.16436987183988094,
+        0.2617858499288559
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.3598197102546692,
+      "ci95": [
+        0.2300000250339508,
+        0.45693691521883006
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.25874170660972595,
+      "ci95": [
+        0.10214908309280873,
+        0.3965892583131789
+      ],
+      "stable_channels": 41
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 5,
+      "gap_days": 7.0,
+      "r2": 0.512712299823761,
+      "ci95": [
+        0.42909719347953795,
+        0.573654581606388
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.5904116630554199,
+      "ci95": [
+        0.5141348212957382,
+        0.6498431921005249
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.1678566336631775,
+      "ci95": [
+        0.11951300483196974,
+        0.2085473086684942
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.5411136150360107,
+      "ci95": [
+        0.4483366638422012,
+        0.6310707598924635
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.3471696376800537,
+      "ci95": [
+        0.27662692293524743,
+        0.4033981718122959
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.5759701728820801,
+      "ci95": [
+        0.46264279410243037,
+        0.6619202792644501
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 0,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.5205053687095642,
+      "ci95": [
+        0.4265343822538853,
+        0.5836038604378699
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "gru",
+      "source": "small",
+      "target": "small",
+      "seed": 1,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.6773595809936523,
+      "ci95": [
+        0.5640285670757293,
+        0.7658433720469474
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "gru",
+      "source": "small",
+      "target": "small",
+      "seed": 1,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.6422873735427856,
+      "ci95": [
+        0.5028827503323555,
+        0.747270955145359
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "medium",
+      "seed": 1,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.7569144368171692,
+      "ci95": [
+        0.6905481085181236,
+        0.8114690631628036
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "medium",
+      "seed": 1,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.7605642080307007,
+      "ci95": [
+        0.686203607916832,
+        0.8213286906480789
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "gru",
+      "source": "large",
+      "target": "large",
+      "seed": 1,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.8686879873275757,
+      "ci95": [
+        0.8448233157396317,
+        0.8909006148576737
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "gru",
+      "source": "large",
+      "target": "large",
+      "seed": 1,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.8776814937591553,
+      "ci95": [
+        0.8560603946447373,
+        0.8969151943922042
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 1,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.23131558299064636,
+      "ci95": [
+        0.17854770570993422,
+        0.2780959330499172
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 1,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.4176558256149292,
+      "ci95": [
+        0.3246866226196289,
+        0.49122297540307036
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 1,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.10528700053691864,
+      "ci95": [
+        -0.08182786479592323,
+        0.26181605681777
+      ],
+      "stable_channels": 40
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 1,
+      "k": 5,
+      "gap_days": 1.0,
+      "r2": 0.43279755115509033,
+      "ci95": [
+        0.365153057128191,
+        0.4994954317808151
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.4687802791595459,
+      "ci95": [
+        0.3733099430799484,
+        0.5484888136386871
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.260174423456192,
+      "ci95": [
+        0.17018524631857873,
+        0.3338555946946144
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.5567507743835449,
+      "ci95": [
+        0.4762406378984451,
+        0.6180054172873497
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.35946938395500183,
+      "ci95": [
+        0.2938799776136875,
+        0.40761682391166687
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.5826313495635986,
+      "ci95": [
+        0.47820583283901213,
+        0.6689171254634857
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.4768233001232147,
+      "ci95": [
+        0.3633135721087456,
+        0.5540917873382568
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 1,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.11592227965593338,
+      "ci95": [
+        0.052926932368427514,
+        0.16908448301255702
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 1,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.35445868968963623,
+      "ci95": [
+        0.29625824838876724,
+        0.41133907437324524
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 1,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.3700082302093506,
+      "ci95": [
+        0.27794702500104906,
+        0.4534386031329632
+      ],
+      "stable_channels": 39
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 1,
+      "k": 5,
+      "gap_days": 8.0,
+      "r2": 0.27015167474746704,
+      "ci95": [
+        0.17822802029550075,
+        0.34332612156867975
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.28919216990470886,
+      "ci95": [
+        0.18957568444311618,
+        0.3917215511202812
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.14114610850811005,
+      "ci95": [
+        0.06082560643553734,
+        0.2151549644768238
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.6075975298881531,
+      "ci95": [
+        0.536125086247921,
+        0.6597349733114243
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.4723832309246063,
+      "ci95": [
+        0.4143299043178558,
+        0.5223649278283119
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.6583893895149231,
+      "ci95": [
+        0.6002634435892105,
+        0.7067023411393165
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.6204790472984314,
+      "ci95": [
+        0.5715243861079216,
+        0.6601123690605164
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 1,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.33314719796180725,
+      "ci95": [
+        0.20835017636418343,
+        0.453448936343193
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 1,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.5596570372581482,
+      "ci95": [
+        0.43583293035626414,
+        0.6883428111672402
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 1,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.3033500909805298,
+      "ci95": [
+        0.11330543290823698,
+        0.4648740708827972
+      ],
+      "stable_channels": 40
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 1,
+      "k": 5,
+      "gap_days": 1.0,
+      "r2": 0.48464521765708923,
+      "ci95": [
+        0.2845360554754734,
+        0.648271144926548
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.3998072147369385,
+      "ci95": [
+        0.17867546528577805,
+        0.5865570485591886
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": -0.050697047263383865,
+      "ci95": [
+        -0.31408816650509835,
+        0.12831294164061544
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.5195307731628418,
+      "ci95": [
+        0.27958024516701696,
+        0.686171467602253
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.43102991580963135,
+      "ci95": [
+        0.3091496653854847,
+        0.535957795381546
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.655321478843689,
+      "ci95": [
+        0.5059516906738282,
+        0.7727511554956435
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.5599738955497742,
+      "ci95": [
+        0.452256815135479,
+        0.6475798234343528
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 1,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.29194316267967224,
+      "ci95": [
+        0.22658283039927482,
+        0.34262532740831375
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 1,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.48644301295280457,
+      "ci95": [
+        0.416192676872015,
+        0.5539538875222206
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 1,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.30337318778038025,
+      "ci95": [
+        0.20425275936722756,
+        0.3980530403554439
+      ],
+      "stable_channels": 41
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 1,
+      "k": 5,
+      "gap_days": 7.0,
+      "r2": 0.4889775812625885,
+      "ci95": [
+        0.42943444177508355,
+        0.544814196228981
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.45335668325424194,
+      "ci95": [
+        0.37355001270771027,
+        0.5279619634151458
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.1980934590101242,
+      "ci95": [
+        0.12760962024331093,
+        0.2711332403123379
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.6734821796417236,
+      "ci95": [
+        0.6148687973618507,
+        0.7186047464609145
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.5142666101455688,
+      "ci95": [
+        0.4665141195058823,
+        0.5638638377189636
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.6740695238113403,
+      "ci95": [
+        0.6250600442290306,
+        0.7166181057691574
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.6311004161834717,
+      "ci95": [
+        0.5764004394412041,
+        0.6775896817445755
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 1,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.2361268252134323,
+      "ci95": [
+        0.14644086323678493,
+        0.30159840062260623
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 1,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.49285125732421875,
+      "ci95": [
+        0.3191142395138741,
+        0.6286031648516655
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 1,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.4692351222038269,
+      "ci95": [
+        0.31309816241264343,
+        0.5998256862163542
+      ],
+      "stable_channels": 39
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 1,
+      "k": 5,
+      "gap_days": 8.0,
+      "r2": 0.5200157761573792,
+      "ci95": [
+        0.3151543438434601,
+        0.6590367168188095
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.3943527042865753,
+      "ci95": [
+        0.16775245107710363,
+        0.5726420879364014
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.18476557731628418,
+      "ci95": [
+        -0.015513411886058735,
+        0.31981380656361574
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.5714489817619324,
+      "ci95": [
+        0.3253608115017414,
+        0.752843426167965
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.41915422677993774,
+      "ci95": [
+        0.2920617662370205,
+        0.5295723542571067
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.6822930574417114,
+      "ci95": [
+        0.5437331467866897,
+        0.7799613267183304
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.5683834552764893,
+      "ci95": [
+        0.43190765380859375,
+        0.6644567117094994
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 1,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.22820837795734406,
+      "ci95": [
+        0.15523832738399507,
+        0.2859718285501003
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 1,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.38256028294563293,
+      "ci95": [
+        0.24799991101026536,
+        0.5073827922344207
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 1,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.4048333466053009,
+      "ci95": [
+        0.2696515865623951,
+        0.5159328252077102
+      ],
+      "stable_channels": 41
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 1,
+      "k": 5,
+      "gap_days": 7.0,
+      "r2": 0.5670992136001587,
+      "ci95": [
+        0.4981011152267456,
+        0.6247821569442749
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.549085795879364,
+      "ci95": [
+        0.44094899073243143,
+        0.6323048099875449
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 1,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.21982204914093018,
+      "ci95": [
+        0.09580733478069306,
+        0.3129536554217338
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.640881359577179,
+      "ci95": [
+        0.5599432677030564,
+        0.7058096304535866
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 1,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.3391975164413452,
+      "ci95": [
+        0.27384035661816597,
+        0.3845935150980949
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.6053374409675598,
+      "ci95": [
+        0.48482025414705276,
+        0.7042403548955917
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 1,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.5564249753952026,
+      "ci95": [
+        0.4746444374322891,
+        0.6177465096116066
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "gru",
+      "source": "small",
+      "target": "small",
+      "seed": 2,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.719656765460968,
+      "ci95": [
+        0.635244308412075,
+        0.788554759323597
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "gru",
+      "source": "small",
+      "target": "small",
+      "seed": 2,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.6575220227241516,
+      "ci95": [
+        0.519824743270874,
+        0.74808828830719
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "medium",
+      "seed": 2,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.7542533874511719,
+      "ci95": [
+        0.6739760011434555,
+        0.8179059699177742
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "medium",
+      "seed": 2,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.6949630379676819,
+      "ci95": [
+        0.5776542752981186,
+        0.777312384545803
+      ]
+    },
+    {
+      "method": "within_day",
+      "decoder": "gru",
+      "source": "large",
+      "target": "large",
+      "seed": 2,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.8650772571563721,
+      "ci95": [
+        0.8337691098451614,
+        0.89247917085886
+      ]
+    },
+    {
+      "method": "latent_within_day",
+      "decoder": "gru",
+      "source": "large",
+      "target": "large",
+      "seed": 2,
+      "k": null,
+      "gap_days": 0.0,
+      "r2": 0.8588092923164368,
+      "ci95": [
+        0.8241922751069068,
+        0.885891804099083
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 2,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.22046658396720886,
+      "ci95": [
+        0.16992073506116867,
+        0.26356286108493804
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 2,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.40003225207328796,
+      "ci95": [
+        0.2977685250341892,
+        0.48453005105257035
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 2,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.18439044058322906,
+      "ci95": [
+        0.04977216990664601,
+        0.29183314368128777
+      ],
+      "stable_channels": 40
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 2,
+      "k": 5,
+      "gap_days": 1.0,
+      "r2": 0.40865835547447205,
+      "ci95": [
+        0.30480031818151476,
+        0.48545307144522665
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.4528730511665344,
+      "ci95": [
+        0.34586215317249297,
+        0.5444050937891006
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.18596820533275604,
+      "ci95": [
+        0.14051812887191772,
+        0.21551577374339104
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.4929882884025574,
+      "ci95": [
+        0.3977152742445469,
+        0.5764640957117081
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.35838091373443604,
+      "ci95": [
+        0.31543992310762403,
+        0.4060767829418182
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.6252157688140869,
+      "ci95": [
+        0.5453267872333527,
+        0.6870155468583107
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "medium",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.5264006853103638,
+      "ci95": [
+        0.4322757638990879,
+        0.6002412259578704
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 2,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.07101146131753922,
+      "ci95": [
+        0.009144325077068065,
+        0.12129210401326417
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 2,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.3561869263648987,
+      "ci95": [
+        0.28000000268220904,
+        0.426476926356554
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 2,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.36809900403022766,
+      "ci95": [
+        0.2658083073794842,
+        0.45483855903148646
+      ],
+      "stable_channels": 39
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 2,
+      "k": 5,
+      "gap_days": 8.0,
+      "r2": 0.42914310097694397,
+      "ci95": [
+        0.3292727433145046,
+        0.5147803619503974
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.4750545620918274,
+      "ci95": [
+        0.3864388383924961,
+        0.5606358066201209
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.36327892541885376,
+      "ci95": [
+        0.30878324806690216,
+        0.41876479014754286
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.5734909772872925,
+      "ci95": [
+        0.49352710247039794,
+        0.6441592246294021
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.47234591841697693,
+      "ci95": [
+        0.4132183142006397,
+        0.5222641542553902
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.6875645518302917,
+      "ci95": [
+        0.6298753917217255,
+        0.7320238888263703
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "small",
+      "target": "large",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.6746237277984619,
+      "ci95": [
+        0.6378712385892868,
+        0.7053681433200836
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 2,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.195374995470047,
+      "ci95": [
+        0.027351164212450388,
+        0.3199418574571609
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 2,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.541631817817688,
+      "ci95": [
+        0.41811811476945876,
+        0.664061665534973
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 2,
+      "k": null,
+      "gap_days": 1.0,
+      "r2": 0.3533862233161926,
+      "ci95": [
+        0.1798037149012089,
+        0.5079659804701805
+      ],
+      "stable_channels": 40
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 2,
+      "k": 5,
+      "gap_days": 1.0,
+      "r2": 0.3600485026836395,
+      "ci95": [
+        0.17323919832706453,
+        0.5257828757166861
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.5917854309082031,
+      "ci95": [
+        0.4660538583993912,
+        0.693811710178852
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 1.0,
+      "r2": 0.2328624725341797,
+      "ci95": [
+        0.12521167602390051,
+        0.31817680001258847
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.6392786502838135,
+      "ci95": [
+        0.5058499842882156,
+        0.7386813566088676
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 1.0,
+      "r2": 0.467123806476593,
+      "ci95": [
+        0.3679532170295715,
+        0.5472373932600021
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.5933519601821899,
+      "ci95": [
+        0.3921378329396248,
+        0.7411855652928352
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "small",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 1.0,
+      "r2": 0.570615828037262,
+      "ci95": [
+        0.4527426637709141,
+        0.6746541529893875
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 2,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.280306339263916,
+      "ci95": [
+        0.22283688001334667,
+        0.33442446067929266
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 2,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.40141060948371887,
+      "ci95": [
+        0.30609221309423446,
+        0.48304160535335533
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 2,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.2964746356010437,
+      "ci95": [
+        0.19280231073498727,
+        0.40098349526524535
+      ],
+      "stable_channels": 41
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 2,
+      "k": 5,
+      "gap_days": 7.0,
+      "r2": 0.5573092699050903,
+      "ci95": [
+        0.48604702204465866,
+        0.6174532637000084
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.47760915756225586,
+      "ci95": [
+        0.39133538901805875,
+        0.5582023933529853
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.2859463691711426,
+      "ci95": [
+        0.2288777709007263,
+        0.3429131038486957
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.6080279350280762,
+      "ci95": [
+        0.5335767135024071,
+        0.6642532095313072
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.45533400774002075,
+      "ci95": [
+        0.3928789243102074,
+        0.5063346177339554
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.6999523639678955,
+      "ci95": [
+        0.6547914385795593,
+        0.7383493542671203
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "medium",
+      "target": "large",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.666715145111084,
+      "ci95": [
+        0.6254004448652267,
+        0.7012521713972092
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 2,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.23572127521038055,
+      "ci95": [
+        0.14812712818384172,
+        0.30153649002313604
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 2,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.45252227783203125,
+      "ci95": [
+        0.2333050139248371,
+        0.6301432535052299
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 2,
+      "k": null,
+      "gap_days": 8.0,
+      "r2": 0.3429512679576874,
+      "ci95": [
+        0.09055269211530687,
+        0.5469996258616445
+      ],
+      "stable_channels": 39
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 2,
+      "k": 5,
+      "gap_days": 8.0,
+      "r2": 0.41374245285987854,
+      "ci95": [
+        0.15555804260075093,
+        0.5992030039429664
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.47815707325935364,
+      "ci95": [
+        0.22710674516856671,
+        0.6709331110119818
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 8.0,
+      "r2": 0.16881363093852997,
+      "ci95": [
+        0.06036290396004916,
+        0.25292001888155935
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.6010231971740723,
+      "ci95": [
+        0.40196783989667895,
+        0.7583843648433684
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 8.0,
+      "r2": 0.4288005530834198,
+      "ci95": [
+        0.30369546040892603,
+        0.5287182420492171
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.5744929909706116,
+      "ci95": [
+        0.31962519884109497,
+        0.7618395522236823
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "small",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 8.0,
+      "r2": 0.6078611612319946,
+      "ci95": [
+        0.4998593404889107,
+        0.6862629950046539
+      ]
+    },
+    {
+      "method": "no_adaptation",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 2,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.10032837837934494,
+      "ci95": [
+        0.032155255787074566,
+        0.15318336486816406
+      ]
+    },
+    {
+      "method": "renormalize",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 2,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.3523940145969391,
+      "ci95": [
+        0.2305599920451641,
+        0.45822710245847703
+      ]
+    },
+    {
+      "method": "latent_align",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 2,
+      "k": null,
+      "gap_days": 7.0,
+      "r2": 0.2980820834636688,
+      "ci95": [
+        0.14658493958413601,
+        0.44049144014716146
+      ],
+      "stable_channels": 41
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 2,
+      "k": 5,
+      "gap_days": 7.0,
+      "r2": 0.4894692301750183,
+      "ci95": [
+        0.38107831254601476,
+        0.5763863608241081
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.5533062219619751,
+      "ci95": [
+        0.4440693385899067,
+        0.6402915075421333
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 2,
+      "k": 10,
+      "gap_days": 7.0,
+      "r2": 0.19928984344005585,
+      "ci95": [
+        0.15888601914048195,
+        0.22930574901401996
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.5847892761230469,
+      "ci95": [
+        0.492696987092495,
+        0.6727535873651503
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 2,
+      "k": 20,
+      "gap_days": 7.0,
+      "r2": 0.38349542021751404,
+      "ci95": [
+        0.3308998614549637,
+        0.44002239927649495
+      ]
+    },
+    {
+      "method": "fewshot",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.6832627654075623,
+      "ci95": [
+        0.6177430555224419,
+        0.7312158018350601
+      ]
+    },
+    {
+      "method": "scratch",
+      "decoder": "gru",
+      "source": "large",
+      "target": "medium",
+      "seed": 2,
+      "k": 40,
+      "gap_days": 7.0,
+      "r2": 0.5153160095214844,
+      "ci95": [
+        0.44535019993782043,
+        0.5748109713196754
+      ]
+    }
+  ]
+}

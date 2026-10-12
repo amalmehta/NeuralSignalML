@@ -325,7 +325,7 @@ def results_markdown(runs) -> str:
     if eeg:
         L += ["## Motor imagery EEG: BCI Competition IV 2a", "",
               "4-class accuracy on each subject's 288-trial evaluation session (chance 25%; a random "
-              "classifier beats 29.5% only 5% of the time).", ""]
+              f"classifier beats {M.chance_upper(288, 4)*100:.1f}% only 5% of the time).", ""]
         for proto in ("cross_session", "cross_subject"):
             if proto not in runs[eeg[0]]["protocols"]:
                 continue

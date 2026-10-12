@@ -114,3 +114,28 @@ def test_closed_loop_simulator_reaches_with_a_perfect_decoder():
         cl.streaming_decoder = orig
     assert all(t["success"] for t in trials)
     assert all(t["time_s"] < 1.5 for t in trials)
+
+
+def test_bits_per_spike_reference_points():
+    """co-bps is 0 for each neuron's mean rate, positive for the true rates, negative for bad ones."""
+    from neuralsignal.nlb import bits_per_spike
+    rng = np.random.default_rng(7)
+    true = np.exp(rng.normal(-3, 1, (50, 40, 6)))
+    spikes = rng.poisson(true)
+    mean = np.broadcast_to(spikes.reshape(-1, 6).mean(0), true.shape)
+    assert abs(bits_per_spike(mean, spikes)) < 1e-9
+    assert bits_per_spike(true, spikes) > 0.1
+    assert bits_per_spike(true * 5, spikes) < 0
+
+
+def test_ndt_starts_at_mean_rates():
+    """The readout bias is initialised at each neuron's log mean rate, so an untrained NDT is ~the null model."""
+    import torch
+    from neuralsignal.nlb import NDT, NLBData, bits_per_spike, train_ndt
+    rng = np.random.default_rng(8)
+    d = NLBData(heldin=rng.poisson(0.05, (24, 20, 10)).astype(float), heldout=rng.poisson(0.05, (24, 20, 4)).astype(float),
+                vel=np.zeros((24, 20, 2), np.float32), split=np.array(["train"] * 20 + ["val"] * 4))
+    cfg = dict(model=dict(d_model=16, layers=1, heads=2, dropout=0.0), lr=1e-9, weight_decay=0.0, epochs=1,
+               batch_size=8, mask_ratio=0.25, eval_every=1)
+    rates, _ = train_ndt(d, cfg)
+    assert abs(rates[..., 10:].mean() - d.heldout[:20].mean()) < 0.02

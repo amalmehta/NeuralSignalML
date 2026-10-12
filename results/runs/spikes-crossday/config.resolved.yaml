@@ -1,0 +1,49 @@
+id: spikes-crossday
+name: Spikes - across days
+experiment: crossday
+days:
+- small
+- medium
+- large
+decoders:
+- kalman
+- gru
+seeds:
+- 0
+- 1
+- 2
+threads: 1
+preprocess:
+  bin_ms: 50
+  lag_ms: 100
+  pre_ms: 750
+  post_ms: 450
+  score_pre_ms: 250
+min_rate_hz: 0.5
+latent_dim: 12
+stable_fraction: 0.6
+fewshot_k:
+- 5
+- 10
+- 20
+- 40
+finetune_epochs: 150
+kalman:
+  ridge: 0.001
+  state:
+  - velocity
+  - position
+  - acceleration
+gru:
+  hidden: 128
+  layers: 1
+  dropout: 0.3
+  input_dropout: 0.2
+  lr: 0.002
+  weight_decay: 0.0001
+  batch_size: 16
+  max_epochs: 400
+  patience: 60
+  val_frac: 0.2
+_source: configs/Spikes Cross Day.yaml
+_hash: 4e99c7857f
