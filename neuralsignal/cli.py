@@ -4,6 +4,7 @@
   train CONFIG [CONFIG ...]      run experiments (use --all for every file in configs/)
   report                         build results/Results.md and the figures in docs/figures
   spikesort                      run the synthetic spike-sorting demo
+  latency                        time every decoder running online, bin by bin
   app ...                        JSON helper used by the Mac app (see bridge.py)
 """
 from __future__ import annotations
@@ -24,6 +25,7 @@ def main(argv=None) -> None:
     t.add_argument("--all", action="store_true")
     sub.add_parser("report", help="aggregate results and draw figures")
     sub.add_parser("spikesort", help="synthetic spike-sorting demo")
+    sub.add_parser("latency", help="measure online (bin-by-bin) decoding latency")
     a = sub.add_parser("app", help="helper for the Mac app")
     a.add_argument("args", nargs=argparse.REMAINDER)
     ns = p.parse_args(argv)
@@ -44,6 +46,9 @@ def main(argv=None) -> None:
     elif ns.cmd == "spikesort":
         from neuralsignal.spikesort.demo import main as ss
         ss()
+    elif ns.cmd == "latency":
+        from neuralsignal.latency import main as lat
+        lat()
     elif ns.cmd == "app":
         from neuralsignal.bridge import main as br
         sys.exit(br(ns.args))

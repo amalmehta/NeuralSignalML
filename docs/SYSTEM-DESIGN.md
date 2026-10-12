@@ -66,9 +66,14 @@ flowchart LR
 | `evaluation/metrics.py` | Accuracy, Cohen's kappa, the binomial chance threshold, variance-weighted R², a trial-level bootstrap, and the Wilcoxon signed-rank test. |
 | `report.py` | Builds `results/Results.md` and every figure from saved results. It never retrains. |
 | `spikesort/demo.py` | A self-contained spike-sorting walkthrough on synthetic data with known ground truth. |
-| `bridge.py` | The app's backend: `recordings`, `export`, `models` and `decode`, each answering with one JSON object. |
+| `bridge.py` | The app's backend: `recordings`, `export`, `models` and `decode`, each answering with one JSON object, plus `stream`, which prints one JSON line per online decoder update. |
+| `crossday.py` | Phase 2: decoders across recording days (MC_Maze Small/Medium/Large) on electrode-level counts. Compares no adaptation, re-normalisation, latent alignment and few-shot recalibration. |
+| `eeg_calibration.py`, `models/riemann.py` | Phase 2: decoding a new person with little or no calibration. Euclidean alignment, Riemannian re-centring with a tangent-space classifier, and a calibration curve. |
+| `nlb.py` | Phase 2: the Neural Latents Benchmark co-smoothing protocol, with the Smoothing baseline and a Neural Data Transformer. |
+| `models/streaming.py`, `latency.py` | Phase 2: bin-by-bin (online) versions of every decoder. The Kalman gains are precomputed, which makes outputs identical to offline at about 0.1 ms per update. Also latency measurement. |
+| `closedloop.py` | Phase 2: a simulated closed-loop cursor task. Neurons are fitted to real data, and a simulated user steers using the decoded cursor. |
 | `app/Sources/SignalCore` | Filters (RBJ biquads arranged as a 4th-order Butterworth, plus a notch) run with vDSP, an STFT spectrogram, and min/max decimation for drawing. Unit tested. |
-| `app/Sources/NeuralSignalML` | SwiftUI app state (`AppModel`), the Python subprocess bridge, the views, Settings (⌘,) and Feedback. |
+| `app/Sources/NeuralSignalML` | SwiftUI app state (`AppModel`), the Python subprocess bridge, the views, Settings (⌘,) and Feedback. `LiveSession` + the **Live** tab run a decoder online through `bridge.py stream`, paced by the data's own timestamps, and show measured latency. |
 
 ## Main flows
 
@@ -144,12 +149,20 @@ flowchart LR
   - the notch
   - the spectrogram peak frequency
   - min/max decimation keeping extremes
+- **`tests/test_phase2.py`** (synthetic):
+  - Euclidean alignment whitening the mean covariance
+  - the Riemannian mean (fixed point and affine invariance)
+  - re-centring removing a per-person mixing
+  - latent alignment recovering a known rotation
+  - the Kalman observation refit keeping the dynamics
+  - streaming decoders matching offline predictions exactly
+  - the closed-loop simulator succeeding with a perfect decoder
 - **End to end:** the bridge's `decode` on A01E with the A01 held-out-session CSP+LDA model reproduces the training run's 77.8%.
 
 ## Known limits
 
-- **Offline only.** Everything is offline decoding of recorded data; closed-loop performance (the user adapting to the decoder) isn't measured.
-- **Spike decoding** is tested on held-out trials of one session from one monkey. Nothing here measures performance across days.
+- **Closed loop is simulated.** The simulated user is a proportional controller with a feedback delay, and the neurons are Poisson GLMs fitted to real data. Real neurons have richer dynamics, and real users learn and adapt to the decoder. The simulator ranks decoders under that stated model; it isn't a substitute for a user study.
+- **Across days:** one monkey, three days (1 and 7–8 days apart). The electrode-level inputs discard sorting detail, so within-day R² is a little lower than with sorted units.
 - **Spike sorting** is shown only on synthetic data (MC_Maze arrives sorted). BIC model selection over-splits on some seeds.
 - **EOG regression** removes some frontal brain signal along with eye artefacts. ICA would be the next step.
 - **Statistics:** with 9 subjects, the Wilcoxon test can't reach p < 0.004, so "no significant difference" is weak evidence of equality.

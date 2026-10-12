@@ -33,7 +33,8 @@ def _runs() -> dict:
     out = {}
     for p in sorted((RESULTS_DIR / "runs").glob("*/metrics.json")):
         m = json.loads(p.read_text())
-        out[m["method"]] = m
+        if "method" in m:  # the single-method experiments; Phase 2 runs are reported by report_phase2
+            out[m["method"]] = m
     return out
 
 
@@ -371,8 +372,11 @@ def results_markdown(runs) -> str:
               f"{s['n_true']} true spikes from 3 units; {s['n_detected']} detections; recall "
               f"{s['recall']*100:.1f}%, precision {s['precision']*100:.1f}%, sorting accuracy "
               f"{s['sorting_accuracy']*100:.1f}%, units found by BIC: {s['n_units_found']}.", ""]
+    from neuralsignal import report_phase2
+    report_phase2.build(L)
     L += ["## Run details", "", "| Run | Config hash | Minutes |", "|---|---|---|"]
-    L += [f"| {r['name']} | `{r['config_hash']}` | {r['minutes']} |" for r in runs.values()]
+    every = [json.loads(q.read_text()) for q in sorted((RESULTS_DIR / "runs").glob("*/metrics.json"))]
+    L += [f"| {r['name']} | `{r['config_hash']}` | {r['minutes']} |" for r in every if "config_hash" in r]
     return "\n".join(L) + "\n"
 
 

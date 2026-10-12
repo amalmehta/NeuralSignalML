@@ -1,0 +1,30 @@
+# EEG for a new person with little or no calibration: alignment + a calibration curve.
+id: eeg-calibration
+name: EEG - without calibration
+experiment: eeg_calibration
+subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+methods: [csp_lda, ea_csp_lda, ts_lda, ra_ts_lda, ea_eegnet]
+curve_methods: [csp_lda, ea_csp_lda, ra_ts_lda]   # the fast ones get the full calibration curve
+calibration_k: [0, 5, 10, 20, 40]                  # labelled day-1 trials per class (x4 classes)
+draws: [0, 1, 2]                                   # which trials are drawn, for k > 0
+own_only_min_k: 5
+threads: 4
+preprocess:                  # same epochs as the original CSP + LDA experiment
+  band: [8.0, 30.0]
+  tmin: 0.5
+  tmax: 2.5
+  eog_regression: true
+  resample_fs: null
+  reject_uv: 100.0
+  causal: true
+eegnet:                      # same epochs and model as the original EEGNet held-out-subject runs
+  preprocess:
+    band: [4.0, 40.0]
+    tmin: 0.5
+    tmax: 2.5
+    eog_regression: true
+    resample_fs: 125
+    reject_uv: 100.0
+    causal: true
+  model: {F1: 8, D: 2, F2: 16, dropout: 0.5}
+  training: {lr: 0.001, weight_decay: 0.001, batch_size: 64, max_epochs: 80, patience: 80, val_frac: 0.2}

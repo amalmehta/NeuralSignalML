@@ -1,0 +1,47 @@
+{
+  "rows": [
+    {
+      "done": true,
+      "updates": 6000,
+      "compute_ms_median": 0.08175650145858526,
+      "compute_ms_p95": 0.2473856904543937,
+      "compute_ms_max": 84.02798097813502,
+      "decoder": "Kalman filter",
+      "budget_ms": 50,
+      "within_budget_p95": true
+    },
+    {
+      "done": true,
+      "updates": 6000,
+      "compute_ms_median": 1.6185235290322453,
+      "compute_ms_p95": 16.886811080621555,
+      "compute_ms_max": 158.88831298798323,
+      "decoder": "GRU",
+      "budget_ms": 50,
+      "within_budget_p95": true
+    },
+    {
+      "done": true,
+      "updates": 9143,
+      "compute_ms_median": 2.984413004014641,
+      "compute_ms_p95": 17.254500114358958,
+      "compute_ms_max": 427.15758498525247,
+      "decoder": "CSP + LDA",
+      "budget_ms": 250,
+      "within_budget_p95": true
+    },
+    {
+      "done": true,
+      "updates": 9143,
+      "compute_ms_median": 6.0574779636226594,
+      "compute_ms_p95": 30.06955590681172,
+      "compute_ms_max": 233.15595998428762,
+      "decoder": "EEGNet",
+      "budget_ms": 250,
+      "within_budget_p95": true
+    }
+  ],
+  "machine": "macOS-26.6.2-x86_64-i386-64bit",
+  "processor": "Intel(R) Core(TM) i9-9980HK CPU @ 2.40GHz",
+  "load_average": 74.7275390625
+}

@@ -136,6 +136,60 @@ def cmd_decode(a) -> dict:
                 note="R² is computed on held-out trials only; training trials are shown greyed out.")
 
 
+def cmd_stream(a) -> dict:
+    """Run a decoder online, one update at a time, printing one JSON line per update
+    (then a final summary object). The app plays the lines back in real time."""
+    import time
+    from neuralsignal.models import registry
+    from neuralsignal.models.streaming import StreamingEEG, streaming_decoder
+    import torch
+    torch.set_num_threads(1)  # one update at a time: thread start-up costs more than it saves
+    model, meta = registry.load(Path(a.model))
+    path = Path(a.path)
+    if _kind(path) != meta["kind"]:
+        raise ValueError(f"This is a {meta['kind']} decoder but the recording is {_kind(path)}.")
+    lat = []
+
+    def emit(obj):
+        obj["sent"] = time.time()
+        print(json.dumps(obj), flush=True)
+
+    if meta["kind"] == "spikes":
+        from neuralsignal.preprocess.spikes import segment_trials
+        sess = mc_maze.load_file(path)
+        seg = segment_trials(sess, **meta["preprocess"])
+        seen = set(meta.get("trained_on_trials", []))
+        pre = meta["preprocess"]["pre_ms"] / 1000
+        dec = streaming_decoder(model)
+        for i in np.argsort(seg.onset_time):
+            dec.reset()  # each trial starts from the decoder's resting state, as in training
+            for b in range(seg.X.shape[1]):
+                t0 = time.perf_counter()
+                v = dec.step(seg.X[i, b])
+                ms = (time.perf_counter() - t0) * 1000
+                lat.append(ms)
+                emit(dict(t=round(float(seg.onset_time[i] - pre + (b + 1) * seg.bin_s), 4), trial=int(seg.trial_index[i]),
+                          held_out=int(seg.trial_index[i]) not in seen, true=np.round(seg.Y[i, b], 1).tolist(),
+                          pred=np.round(v, 1).tolist(), compute_ms=round(ms, 3)))
+    else:
+        from neuralsignal.preprocess.eeg import fit_eog_regression
+        sess = bci2a.load_file(path)
+        pp = meta["preprocess"]
+        B = fit_eog_regression(sess) if pp.get("eog_regression") else None  # unlabelled calibration runs
+        X, events, _ = _eeg_timeline(sess)
+        stream = StreamingEEG(model, pp, sess.fs, B)
+        chunk = int(sess.fs * 0.1)
+        for start in range(0, X.shape[1] - chunk, chunk):
+            r = stream.push(X[:, start:start + chunk])
+            if r is not None:
+                probs, ms = r
+                lat.append(ms)
+                emit(dict(t=round((start + chunk) / sess.fs, 3), probs=np.round(probs, 4).tolist(), compute_ms=round(ms, 3)))
+    lat = np.array(lat)
+    return dict(done=True, updates=int(len(lat)), compute_ms_median=float(np.median(lat)),
+                compute_ms_p95=float(np.percentile(lat, 95)), compute_ms_max=float(lat.max()))
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="neuralsignal app")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -144,12 +198,16 @@ def main(argv=None) -> int:
     e.add_argument("--path", required=True)
     e.add_argument("--out", required=True)
     sub.add_parser("models")
+    st = sub.add_parser("stream")
+    st.add_argument("--path", required=True)
+    st.add_argument("--model", required=True)
     d = sub.add_parser("decode")
     d.add_argument("--path", required=True)
     d.add_argument("--model", required=True)
     try:
         a = p.parse_args(argv)
-        res = dict(recordings=cmd_recordings, export=cmd_export, models=cmd_models, decode=cmd_decode)[a.cmd](a)
+        res = dict(recordings=cmd_recordings, export=cmd_export, models=cmd_models, decode=cmd_decode,
+                   stream=cmd_stream)[a.cmd](a)
         print(json.dumps(res))
         return 0
     except SystemExit as ex:

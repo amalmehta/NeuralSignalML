@@ -32,7 +32,8 @@ def save(model, folder: Path, meta: dict) -> None:
                     "n_channels": meta["n_channels"], "n_times": meta["n_times"]}, folder / "model.pt")
     elif method == "gru":
         torch.save({"state_dict": model.model.state_dict(), "mu": model.mu, "sd": model.sd,
-                    "y_sd": model.y_sd, "kw": model.kw, "n_units": meta["n_units"]}, folder / "model.pt")
+                    "y_sd": model.y_sd, "kw": model.kw, "n_units": meta["n_units"],
+                    "input_transform": getattr(model, "input_transform", "sqrt")}, folder / "model.pt")
     else:
         raise ValueError(method)
     (folder / "meta.json").write_text(json.dumps(meta, indent=2))
@@ -58,6 +59,7 @@ def load(folder: Path):
         m.model = GRUDecoder(ck["n_units"], **ck["kw"])
         m.model.load_state_dict(ck["state_dict"])
         m.mu, m.sd, m.y_sd = ck["mu"], ck["sd"], ck["y_sd"]
+        m.input_transform = ck.get("input_transform", "sqrt")
         return m, meta
     raise ValueError(method)
 
