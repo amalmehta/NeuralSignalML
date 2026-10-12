@@ -1,0 +1,33 @@
+id: spikes-nlb
+name: Spikes - NLB co-smoothing (NDT)
+experiment: nlb
+days:
+- medium
+seeds:
+- 0
+- 1
+- 2
+threads: 2
+verbose: true
+ndt:
+  model:
+    d_model: 64
+    layers: 2
+    heads: 4
+    dropout: 0.4
+  lr: 0.001
+  weight_decay: 0.05
+  epochs: 800
+  batch_size: 32
+  mask_ratio: 0.25
+  eval_every: 10
+published_test_split:
+  source: Pei et al. 2021, Neural Latents Benchmark '21, arXiv:2109.04463, Table 2
+  MC_Maze_Medium_co_bps:
+    Smoothing: 0.167
+    GPFA: 0.172
+    SLDS: 0.21
+    NDT: 0.259
+    AutoLFADS: 0.304
+_source: configs/Spikes NDT Benchmark.yaml
+_hash: dd61b6a05b

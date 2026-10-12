@@ -1,0 +1,53 @@
+{
+  "name": "Spikes - NLB co-smoothing (NDT)",
+  "id": "spikes-nlb",
+  "experiment": "nlb",
+  "config_hash": "dd61b6a05b",
+  "minutes": 113.7,
+  "rows": [
+    {
+      "day": "medium",
+      "model": "smoothing",
+      "seed": 0,
+      "co_bps": 0.09694990290470552,
+      "vel_r2": 0.2965772157326873
+    },
+    {
+      "day": "medium",
+      "model": "ndt",
+      "seed": 0,
+      "co_bps": 0.18066216051898526,
+      "vel_r2": 0.4388819634914398,
+      "best_val_nll": 0.0813615694642067,
+      "n_params": 93144
+    },
+    {
+      "day": "medium",
+      "model": "ndt",
+      "seed": 1,
+      "co_bps": 0.17692410206139098,
+      "vel_r2": 0.44501516222953796,
+      "best_val_nll": 0.08128226548433304,
+      "n_params": 93144
+    },
+    {
+      "day": "medium",
+      "model": "ndt",
+      "seed": 2,
+      "co_bps": 0.17249504492315484,
+      "vel_r2": 0.4388105869293213,
+      "best_val_nll": 0.08064351975917816,
+      "n_params": 93144
+    }
+  ],
+  "published_test_split": {
+    "source": "Pei et al. 2021, Neural Latents Benchmark '21, arXiv:2109.04463, Table 2",
+    "MC_Maze_Medium_co_bps": {
+      "Smoothing": 0.167,
+      "GPFA": 0.172,
+      "SLDS": 0.21,
+      "NDT": 0.259,
+      "AutoLFADS": 0.304
+    }
+  }
+}

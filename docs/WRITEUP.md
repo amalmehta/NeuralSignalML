@@ -5,6 +5,13 @@ Two decoding problems, each with a classic baseline and a neural network, evalua
 1. **Motor imagery from EEG** (BCI Competition IV 2a). Nine people imagined moving their left hand, right hand, feet or tongue, 288 times per session, on two different days. The task is to decode which of the four they imagined from 22 scalp electrodes.
 2. **Hand velocity from motor-cortex spikes** (Neural Latents Benchmark MC_Maze Medium). A monkey made 250 reaches around a maze while 152 neurons in motor and premotor cortex were recorded. The task is to decode 2D hand velocity from the spikes.
 
+Sections 1–3 cover those two problems and a spike-sorting demo. Sections 4–7 then take on what stands between these offline numbers and a BCI that works for a person:
+
+4. **Across days.** Decoders degrade overnight. How much, and what fixes it?
+5. **Real-time and closed loop.** Can each decoder keep up live, and how do they behave when the user steers by their output?
+6. **A new user.** Can EEG work for someone with little or none of their own calibration data?
+7. **The benchmark.** A Neural Data Transformer under the official Neural Latents Benchmark protocol.
+
 All numbers come from `results/Results.md`, which is generated from the saved runs.
 
 ---
@@ -269,10 +276,42 @@ Then, adding labelled trials from the new person (Riemannian method):
 - **A practical recipe follows:** start a new user on an aligned cross-subject decoder (about 50% from minute one), then switch to their own data once they have about 40 labelled trials. A method that *weights* the new person's trials more heavily than other people's would probably beat both curves; that's a natural next experiment.
 - **Still far from solved.** Even aligned, three of nine people stay below 40%. Some people produce weak motor-imagery rhythms at any calibration level (see section 1).
 
+## 7. Toward the state of the art: the Neural Latents Benchmark
+
+### The task
+
+The Neural Latents Benchmark (Pei et al. 2021) asks a different question from velocity decoding: **does a model capture the population's dynamics?** Each trial's neurons are split into *held-in* neurons, given to the model, and *held-out* neurons, hidden from it. The model must predict the held-out neurons' firing rates from the held-in neurons alone. The score is **co-smoothing bits per spike** (co-bps): how much better the predicted rates explain the held-out spikes than each neuron's mean rate, in bits per spike.
+
+### Models
+
+- **Smoothing** (the official baseline): Gaussian-smooth the held-in spikes, then fit a Poisson regression from them to each held-out neuron.
+- **Neural Data Transformer** (Ye & Pandarinath 2021): a transformer encoder over 5 ms time bins, trained BERT-style. A quarter of the time bins are hidden from the input, and the model must reconstruct every neuron's spikes there. Because it can't just copy its input, it has to learn how the population evolves. Here it is small (2 layers, width 64, about 93k parameters) because it trains on about 190 trials on a CPU.
+
+![NLB co-smoothing](figures/nlb-cobps.png)
+
+| MC_Maze Medium | co-bps, this project (NLB val split) | vel R² from rates | co-bps, published (hidden test split) |
+|---|---|---|---|
+| Smoothing | 0.097 | 0.30 | 0.167 |
+| NDT | **0.177 ± 0.004** (3 seeds) | **0.44** | 0.259 |
+
+**How to read this.** Published numbers are scored on NLB's hidden *test* split through EvalAI, while this project can only score the public *val* split. Both models score lower on val by a similar factor (Smoothing 0.58×, NDT 0.68× the published value), so the useful comparison is against the baseline on the same split:
+- Here, the NDT improves on Smoothing by **+0.080 bits per spike (+82%)**.
+- In the paper the improvement is +0.092 (+55%).
+
+This reproduces the published *gap*, not the published absolute numbers. Submitting to EvalAI needs an account and is left to the project owner.
+
+**What we learned**
+- **Two bugs, both caught by checking against a baseline.** The first full NDT run scored about 0 co-bps, no better than predicting each neuron's average.
+  - The held-out neurons were only scored at masked time bins, so the model never learned to predict them from ordinary, unmasked input. Held-out neurons are never in the input, so the fix is to score them at every bin.
+  - The output layer started out predicting about 50× too many spikes per bin, and a CPU-sized training budget went on unlearning that. The fix is to start it at each neuron's mean rate.
+
+  After fixing both, 100 epochs already beat Smoothing. Without the baseline as a sanity check, the broken run could have been reported as "transformers don't help on small data".
+- **Velocity from inferred rates (0.44) is far below the supervised GRU (0.75, section 2).** These answer different questions. The benchmark's velocity score is a ridge regression at a single time bin from rates the model learned *without seeing velocity*. The GRU was trained directly on velocity. Latent dynamics models are about understanding the neural population, and a supervised decoder still wins at decoding.
+
 ## Honest caveats
 
 - **Closed loop is simulated, not measured with people:** the simulator (section 5) uses GLM neurons and a model user. Real users adapt to the decoder, and real closed-loop performance can differ substantially.
-- **Baselines, not state of the art:** this is a careful comparison of classic and standard neural decoders under honest splits. Stronger published models exist for both datasets; nothing here is meant to compete with them.
+- **Not state of the art:** section 7 runs a small NDT under the official benchmark protocol and reproduces its published margin over the Smoothing baseline. Absolute numbers are on the val split, not the leaderboard's hidden test split. Larger published models (AutoLFADS, STNDT, and newer pretrained ones) score higher.
 - **Three days, one monkey:** the cross-day results (section 4) cover gaps of 1 and 7–8 days in one animal. Longer gaps, other people and other arrays may behave differently.
 - **Small n for EEG statistics:** with 9 subjects, a Wilcoxon test can't go below p ≈ 0.004.
 - **Compute caps:** the held-out-subject EEGNet folds were capped at 80 epochs and one seed, because training ran on a heavily loaded CPU.
@@ -286,6 +325,7 @@ Then, adding labelled trials from the new person (Riemannian method):
 - Lawhern et al. (2018), *EEGNet: a compact convolutional neural network for EEG-based brain–computer interfaces*.
 - Wu et al. (2003), *Neural decoding of cursor motion using a Kalman filter*. Gilja et al. (2012), *A high-performance neural prosthesis enabled by control algorithm design*.
 - Schlögl et al. (2007), *A fully automated correction method of EOG artifacts in EEG recordings*.
+- Ye & Pandarinath (2021), *Representation learning for neural population activity with Neural Data Transformers*.
 - He & Wu (2019), *Transfer learning for brain–computer interfaces: a Euclidean space data alignment approach*. Zanini et al. (2018), *Transfer learning: a Riemannian geometry framework with applications to brain–computer interfaces*. Barachant et al. (2012), *Multiclass brain–computer interface classification by Riemannian geometry*.
 - Degenhart et al. (2020), *Stabilization of a brain–computer interface via the alignment of low-dimensional spaces of neural activity*.
 - Cunningham et al. (2011), *A closed-loop human simulator for investigating the role of feedback control in brain-machine interfaces*. Koyama et al. (2010), *Comparison of brain–computer interface decoding algorithms in open-loop and closed-loop control*.
